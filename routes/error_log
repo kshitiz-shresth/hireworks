@@ -1,0 +1,32 @@
+[20-Jun-2019 22:08:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Artisan' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/console.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/console.php on line 16
+[20-Jun-2019 22:09:35 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/web.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/web.php on line 16
+[20-Jun-2019 23:33:27 UTC] PHP Fatal error:  Uncaught Error: Class 'Broadcast' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/channels.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/channels.php on line 14
+[21-Jun-2019 07:50:59 UTC] PHP Fatal error:  Uncaught Error: Class 'Artisan' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/console.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/console.php on line 16
+[21-Jun-2019 07:59:27 UTC] PHP Fatal error:  Uncaught Error: Class 'Broadcast' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/channels.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/channels.php on line 14
+[21-Jun-2019 12:58:14 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/api.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/api.php on line 16
+[21-Jun-2019 13:00:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/web.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/web.php on line 16
+[21-Jun-2019 21:46:50 UTC] PHP Fatal error:  Uncaught Error: Class 'Route' not found in /home/rsdemos/recruit.rsdemoserver.com/routes/api.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rsdemos/recruit.rsdemoserver.com/routes/api.php on line 16

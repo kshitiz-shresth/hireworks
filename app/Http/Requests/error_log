@@ -1,0 +1,3 @@
+[25-Jul-2019 09:29:41 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\FormRequest' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Http/Requests/CoreRequest.php on line 8
+[25-Jul-2019 11:43:01 UTC] PHP Fatal error:  Class 'App\Http\Requests\CoreRequest' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Http/Requests/StoreTeam.php on line 7
+[06-Aug-2019 21:40:52 UTC] PHP Fatal error:  Class 'App\Http\Requests\CoreRequest' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Http/Requests/UpdateJobApplication.php on line 8

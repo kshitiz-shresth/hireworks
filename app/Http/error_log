@@ -1,0 +1,1 @@
+[04-Jul-2019 03:39:27 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Kernel' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Http/Kernel.php on line 7

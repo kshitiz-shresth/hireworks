@@ -1,0 +1,1 @@
+[03-Jul-2019 19:14:48 UTC] PHP Fatal error:  Class 'Tests\TestCase' not found in /home/rsdemos/recruit.rsdemoserver.com/tests/Unit/ExampleTest.php on line 8

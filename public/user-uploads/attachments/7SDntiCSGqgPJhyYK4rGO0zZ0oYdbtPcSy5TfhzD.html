@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+    
+    <!-- header -->
+    <div class="" id="header-container">
+        <div class="menu-logo">
+            <a href="" id="menu-trigger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            <img src="./img/logo2.png" alt="logo">
+        </div>
+        <div class="search-avatar">
+            <div class="input-search">
+                <input type="text" placeholder="Search">
+                <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
+            </div>
+            <img src="./img/avatar.png" alt="avatar">
+        </div>
+    </div>
+    <!-- side menu -->
+    <div id="side-menu">
+        <ul>
+            <li class="active-link">
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-folder-open fa-3x"></i>
+                    <p class="label_before">Updates</p>
+                </a>
+            </li>
+           
+        </ul>
+    </div>
+    <!-- main container -->
+    <div id="main-container">
+        <div class="greetings-box">
+            <h2>Good Afternoon!</h2>
+            <h2>13 Sun</h2>
+        </div>
+    </div>
+
+  
+  <script>
+    const menuTrigger =  document.getElementById('menu-trigger'),
+            body = document.querySelector('body');
+
+    menuTrigger.addEventListener('click',toggleSideMenu);
+
+    function toggleSideMenu(e) {
+        e.preventDefault();
+        body.classList.toggle('menu-open');
+    }
+  </script>
+</body>
+</html>

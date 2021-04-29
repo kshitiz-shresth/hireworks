@@ -1,0 +1,10 @@
+[01-Jul-2019 01:13:13 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Company.php on line 7
+[01-Jul-2019 09:59:32 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Country.php on line 7
+[01-Jul-2019 13:30:36 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Question.php on line 7
+[01-Jul-2019 17:17:49 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Job.php on line 9
+[01-Jul-2019 20:31:33 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Skill.php on line 7
+[01-Jul-2019 22:33:46 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/JobApplication.php on line 8
+[01-Jul-2019 23:18:04 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Skill.php on line 7
+[01-Jul-2019 23:52:14 UTC] PHP Fatal error:  Class 'Zizaco\Entrust\EntrustRole' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Role.php on line 7
+[02-Jul-2019 18:37:21 UTC] PHP Fatal error:  Class 'Illuminate\Database\Eloquent\Model' not found in /home/rsdemos/recruit.rsdemoserver.com/app/Module.php on line 7
+[11-Jul-2019 06:44:53 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Auth\User' not found in /home/rsdemos/recruit.rsdemoserver.com/app/User.php on line 9

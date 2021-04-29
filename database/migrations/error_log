@@ -1,0 +1,2 @@
+[06-Aug-2019 06:44:01 UTC] PHP Fatal error:  Class 'Illuminate\Database\Migrations\Migration' not found in /home/rsdemos/recruit.rsdemoserver.com/database/migrations/2018_07_19_064526_create_notifications_table.php on line 7
+[10-Sep-2019 10:35:54 UTC] PHP Fatal error:  Class 'Illuminate\Database\Migrations\Migration' not found in /home/rsdemos/recruit.rsdemoserver.com/database/migrations/2018_06_05_165900_create_tasks_table.php on line 7
