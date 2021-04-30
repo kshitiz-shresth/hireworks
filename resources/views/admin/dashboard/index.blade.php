@@ -260,6 +260,18 @@ input:checked + .slider:before {
                     <h4>Total Amount Paid: ${{ $amountPaid/100 }}</h4>
                 </div><!-- /.card-body -->
             </div>
+            @else
+            <div class="card">
+                <div class="card-header d-flex p-0 ui-sortable-handle">
+                    <h3 class="card-title p-3">
+                        <i class="fa fa-info-circle"></i> Plan Details
+                    </h3>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    <h5>Expiry Date: {{ date('M d, Y',strtotime($user->trial_ends_at)) }}</h5>
+                    <h5>Current Plan: Free Plan</h5>
+                </div><!-- /.card-body -->
+            </div>
             @endif
             <div class="card">
                 <div class="card-header d-flex p-0 ui-sortable-handle">

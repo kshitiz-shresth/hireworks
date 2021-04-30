@@ -28,12 +28,17 @@ Route::get('/temp-login',function(){
     return view('temp-user.login');
 });
 
+Route::get('/upgrade-from-free-to-others',function(){
+    return view('admin.dashboard.pay');
+});
+
+
 Route::post('/upgrade','PaymentController@upgrade');
 
 Route::post('/pay-with-stripe','PaymentController@addCard');
 
 
-Route::get('/createPackage','PaymentController@createPlan');
+Route::get('/createPlan','PaymentController@createPlan');
 Route::post('/submit-attachments','AttachmentsController@update');
 
 Route::post('/import-assessments','AssessmentController@import');

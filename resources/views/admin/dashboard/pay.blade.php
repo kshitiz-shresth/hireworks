@@ -22,7 +22,7 @@
             <div class="payment">
                 <form>
                     <input type="hidden" name="stripe_id" id="stripe_id" value="{{ Auth::user()->customer_id }}">
-                    <input type="hidden" name="package" id="package" value="{{ Auth::user()->package }}">
+                    <input type="hidden" name="package" id="package" value="{{ request('plan') ?? Auth::user()->package }}">
                     <div class="form-group owner">
                         <label for="owner">Owner</label>
                         <input type="text" class="form-control" id="owner">

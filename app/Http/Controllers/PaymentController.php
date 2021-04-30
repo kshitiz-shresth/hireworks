@@ -58,6 +58,9 @@ class PaymentController extends Controller
                 if ($card) {
                     // add subscription to the plan if card exist
                     $this->addSubscription($stripeCustomerId, $request->package);
+                    $user = Auth::user();
+                    $user->package = $request->package;
+                    $user->update();
                 }
 
                 // to get all invoices
@@ -131,12 +134,23 @@ class PaymentController extends Controller
     //         'statement_descriptor'  => 'The Hireworks Subs.',
     //     ]);
     // }
-
+    // creating premium plan
+    public function createFreePlan(){
+        $plan = Stripe::plans()->create([
+            'id'                    => 'free',
+            'name'                  => 'Free Plan',
+            'amount'                => 0.00,
+            'currency'              => 'USD',
+            'interval'              => 'month',
+            'statement_descriptor'  => 'The Hireworks Subs.',
+        ]);
+    }
     // executing both plan for the first time
     public function createPlan() {
         $this->createPlusPlan();
         $this->createPremiumPlan();
-        return 'done';
+        $this->createFreePlan();
         // $this->createEnterprisePlan();
+        return 'done';
     }
 }

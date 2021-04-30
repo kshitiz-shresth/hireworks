@@ -101,8 +101,11 @@ ul {
   transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-#header-container .menu-logo img {
-  margin-left: 32px;
+#header-container .menu-logo .menu-img {
+  background: #fff;
+  border-radius: 10px 0px;
+  margin-left: 41px;
+  padding-left: 9px;
 }
 
 #header-container .search-avatar {

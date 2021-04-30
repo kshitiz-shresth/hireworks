@@ -117,9 +117,14 @@ class RegisterController extends Controller
             'company_id' => $setting->id,
             'customer_id' => $customer['id'],
             'stripe_id' => $customer['id'],
-            'package' => $data['package']
+            'package' => $data['package'],
+            'trial_ends_at' => now()->addDays(7)
         ]);
-        
+        // if($data['package']=='free'){
+        //     Stripe::subscriptions()->create($customerID, [
+        //         'plan' => $data['package'],
+        //     ]);
+        // }
         $role =  RoleUser::create([
             'user_id' => $usr->id,
             'role_id' => 1

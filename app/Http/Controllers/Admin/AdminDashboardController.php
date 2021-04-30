@@ -30,12 +30,19 @@ class AdminDashboardController extends AdminBaseController
         return view('admin.assessments.library',$this->data);
     }
 
+    private function isFuture($date){
+        if(strtotime(now())<=strtotime($date)){
+            return 1;
+        }
+        return 0;
+    }
+
     public function index(){
         $this->customerId = $this->user->customer_id;
-
         if($this->user->id==104){
             return redirect('admin/assessments');
         }
+   
         if($this->user->package!='free'){
             $allPlans = Stripe::invoices()->all(array("customer" => $this->customerId));
             // if first time registration
