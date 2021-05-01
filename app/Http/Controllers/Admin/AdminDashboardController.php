@@ -39,15 +39,15 @@ class AdminDashboardController extends AdminBaseController
 
     public function index(){
         $this->customerId = $this->user->customer_id;
-        if($this->user->id==104){
+        if($this->user->email=="super@super.com"){
             return redirect('admin/assessments');
         }
-   
+
         if($this->user->package!='free'){
             $allPlans = Stripe::invoices()->all(array("customer" => $this->customerId));
             // if first time registration
             if(isset($allPlans['data']) && !$allPlans['data'])
-            {   
+            {
                 $amountDue = Stripe::plans()->find($this->user->package)['amount'];
                 return view('admin.dashboard.pay',compact(
                     'amountDue'
@@ -59,14 +59,14 @@ class AdminDashboardController extends AdminBaseController
                     'amountDue'
                 ));
             }
-    
+
             $this->expiryDate = date('Y-m-d',Stripe::invoices()->upcomingInvoice($this->customerId)['period_end']);
-    
+
             $this->subscription = Stripe::customers()->find($this->customerId)['subscriptions']['data'][0];
             // $subscription = Stripe::subscriptions()->update($this->customerId, $this->subscription['id'], [
             //     'plan' => 'premium',
             // ]);
-    
+
              $this->invoices =  Stripe::invoices()->upcomingInvoice($this->customerId)['lines']['data'];
              $this->amountPaid = $allPlans['data'][0]['amount_paid'];
         }
@@ -137,7 +137,7 @@ class AdminDashboardController extends AdminBaseController
             ->where('jobs.company_id',$this->user->company_id)
             ->where('interview_schedules.status', 'pending')
             ->get();
-       
+
          // Filter upcoming schedule
         $upComingSchedules = $this->schedules->filter(function ($value, $key)use($currentDate) {
             return $value->schedule_date >= $currentDate;

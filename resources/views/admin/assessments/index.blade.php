@@ -55,8 +55,8 @@
 
     <div class="row up_header">
         <div class="col-md-6 mb-20 d-flex">
-            @if(Auth::user()->id==104)
-            <a href="http://127.0.0.1:4800/admin" class="btn btn-primary mr-3"><i class="fa fa-arrow-left"></i> Back</a>
+            @if(Auth::user()->email=="super@super.com")
+            <a href="{{env('HIREWORK_ADMIN_URL')}}/admin" class="btn btn-primary mr-3"><i class="fa fa-arrow-left"></i> Back</a>
             @endif
             <h3>My Assessments</h3>
             <a  class="btn btn-primary" href="/admin/library">Library</a>
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        {{-- @if(Auth::user()->id!=104)
+        {{-- @if(Auth::user()->id!="super@super.com")
         <div class="col-3">
             <div class="card">
                 <div class="card-header"><strong>Library</strong></div>
@@ -126,7 +126,7 @@
                                 <input type="hidden" name="assessment_id" value="{{ $item->id }}">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-caret-square-o-left"></i> Import</button>
                             </form>
-                            
+
                         </div>
                         @endforeach
                     </div>
@@ -134,7 +134,7 @@
             </div>
         </div>
         @endif --}}
-  
+
 
     <div class="modal" id="addAssessment">
         <div class="modal-dialog">
