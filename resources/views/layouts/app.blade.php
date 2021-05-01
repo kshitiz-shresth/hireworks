@@ -55,13 +55,13 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body onload="greet()" @if (Auth::user()->id != 104) class="menu-open" @endif>
+<body onload="greet()" @if (Auth::user()->email!="super@super.com") class="menu-open" @endif>
     <!-- header -->
 
     <div class="" id="header-container">
 
         <div class="menu-logo">
-            @if (Auth::user()->id != 104)
+            @if (Auth::user()->email!="super@super.com")
                 <a href="" id="menu-trigger">
                     <span></span>
                     <span></span>
@@ -86,7 +86,7 @@
                 <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
             </div> --}}
             <img src="/img/avatar.png" alt="avatar">
-            @if (Auth::user()->id != 104)
+            @if (Auth::user()->email!="super@super.com")
                 <a class="nav-link" style='color:white;' href="{{ route('logout') }}" title="Logout" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -224,6 +224,7 @@
         </div>
         <!-- main container -->
         <div id="main-container" style="margin-top:65px !important;">
+            @if($user->email!="super@super.com")
             @php
                 function isFuture($date)
                 {
@@ -243,6 +244,7 @@
                     You have {{ $remainingDays }} days Free Trial left, Please <a data-toggle="modal"
                         data-target="#upgradePlanFromFreeToOthers" href="#">upgrade</a> your plan.
                 </div>
+            @endif
             @endif
             <div class="greetings-box">
                 <div class="d-flex flex-column">
