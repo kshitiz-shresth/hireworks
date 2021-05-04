@@ -51,7 +51,7 @@ ul {
             position: relative;
             height: 20px;
             width: 20px;
-            margin-left: 19px;
+            margin-left: 23px;
 
             span {
                 display: block;
@@ -144,11 +144,11 @@ ul {
     .side-menu-wrapper {
         position: fixed;
         top: 63px;
-        left: -93px;
+        left: -101px;
         background-color: #ffffff;
         padding: 12px 11px;
         box-shadow: 3px 0px 10px #00000029;
-        width: 93px;
+        width: 101px;
         z-index: 1;
         transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
     }
@@ -260,45 +260,45 @@ ul {
 
 // when menu is open
 body {
-    &.menu-open {
-        #header-container {
-            #menu-trigger {
-                span {
-                    &:nth-child(1) {
-                        top: 0px;
-                        opacity: 0;
-                    }
+    // &.menu-open {
+    //     #header-container {
+    //         #menu-trigger {
+    //             span {
+    //                 &:nth-child(1) {
+    //                     top: 0px;
+    //                     opacity: 0;
+    //                 }
 
-                    &:nth-child(2) {
-                        top: 8px;
-                        transform: rotate(135deg);
-                        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-                    }
+    //                 &:nth-child(2) {
+    //                     top: 8px;
+    //                     transform: rotate(135deg);
+    //                     transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+    //                 }
 
-                    &:nth-child(3) {
-                        top: 8px;
-                        transform: rotate(45deg);
-                        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-                    }
+    //                 &:nth-child(3) {
+    //                     top: 8px;
+    //                     transform: rotate(45deg);
+    //                     transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+    //                 }
 
-                    &:nth-child(4) {
-                        top: 16px;
-                        opacity: 0;
-                    }
-                }
-            }
-        }
+    //                 &:nth-child(4) {
+    //                     top: 16px;
+    //                     opacity: 0;
+    //                 }
+    //             }
+    //         }
+    //     }
 
         #side-menu {
             .side-menu-wrapper {
-                transform: translate3d(93px, 0, 0);
+                transform: translate3d(101px, 0, 0);
                 transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
             }
         }
 
         #main-container {
-            // transform: translateX(93px);
-            margin-left: 93px;
+            // transform: translateX(101px);
+            margin-left: 101px;
             transition: margin-left .45s cubic-bezier(0.77, 0, 0.175, 1);
         }
     }
