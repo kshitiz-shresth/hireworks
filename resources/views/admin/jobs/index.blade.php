@@ -212,14 +212,18 @@
     });
 
     $(document).on('click', '.jobCheckBox', function() {
-        // console.log($(this).prop("checked"));
-
+        var jobChecked=$(this).prop("checked");
         $.easyAjax({
                 url: '/admin/jobs/changeStatus',
                 type: "GET",
                 data: { 'id' : $(this).data('id'), 'checked': $(this).prop("checked") },
                 success: function(data){
-                    console.log(data);
+                    if(jobChecked){
+                        $('#activeOrInactive').text('Active');
+                    }
+                    else{
+                        $('#activeOrInactive').text('Inactive');
+                    }
             }
         });       
 

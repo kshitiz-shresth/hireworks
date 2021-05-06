@@ -382,6 +382,9 @@ class AdminJobsController extends AdminBaseController
             $job->status = "inactive";
             $job->save();          
         }
+        return response([
+            'status'=>'success'
+        ]);
 
     }
 
@@ -444,7 +447,7 @@ class AdminJobsController extends AdminBaseController
             ->editColumn('status', function ($row) {
                 if ($row->status == 'active') {
                     if($row->title!=null && $row->category_id!=null && $row->job_type!=null && $row->total_positions!=null && $row->salary_frequency!=null && $row->salary!=null && $row->job_location!=null && $row->job_country!=null && $row->skills!=null || $row->is_remote!=null){
-                        return '<input class="jobCheckBox" type="checkbox" checked data-id='."$row->id".'>';
+                        return '<input class="jobCheckBox" type="checkbox" checked data-id='."$row->id".'> <span id="activeOrInactive">Active</span>';
                     }
                     else{
                         return '<input class="jobCheckBox" type="checkbox" checked data-id='."$row->id".'> Draft';
@@ -454,7 +457,7 @@ class AdminJobsController extends AdminBaseController
                 if ($row->status == 'inactive') {
                     if($row->title!=null && $row->category_id!=null && $row->job_type!=null && $row->total_positions!=null && $row->salary_frequency!=null && $row->salary!=null && $row->job_location!=null && $row->job_country!=null && $row->skills!=null || $row->is_remote!=null)
                     {
-                    return '<input class="jobCheckBox" type="checkbox" data-id='."$row->id".'>';
+                    return '<input class="jobCheckBox" type="checkbox" data-id='."$row->id".'> <span id="activeOrInactive">InActive</span>';
                         
                     }
                     else{
