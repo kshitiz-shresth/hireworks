@@ -427,7 +427,7 @@ input:checked + .slider:before {
                                     <a class="nav-link mb-3 p-3 shadow text-center" id="plusButton" >
                                             <span class="font-weight-bold big"><br/>
                                             <i class="fa fa-plus-circle fa-lg"> </i>
-                                            <h4>Add Assessment from Library</h4>
+                                            <h4>Add from My Assessments</h4>
                                             <br/>
                                          </a>
 

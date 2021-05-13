@@ -54,9 +54,9 @@
 @section('content')
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <a  class="btn btn-primary" href="/admin/assessments"> <i class="fa fa-arrow-left"></i> Back</a>
-            <strong>Library</strong></div>
+        <div class="card-header d-flex align-items-center">
+            <a   href="/admin/assessments"> <i class="fa fa-arrow-left"></i></a>
+            <h4 class="mb-0 ml-2">Assessment Library</h4></div>
         <div class="card-body">
             <div style="display: flex; flex-direction: column;">
                 @foreach (\App\Assessment::where('company_id',0)->get() as $item)

@@ -73,14 +73,13 @@
                     <i class="fa fa-plus-circle"></i> Crete New Assessment
                 </button></a>
             @endpermission
-            <a class="btn btn-sm btn-primary" href="/admin/library">Library</a>
+            <a class="btn btn-sm btn-primary" href="/admin/library">Import from Library</a>
 
         </div>
         <hr />
         <div class="row assessment_lists">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header"><strong>Assesments</strong></div>
                     <div class="card-body">
                         <div class="row">
                             @if (count($assessments) > 0)
