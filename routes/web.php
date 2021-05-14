@@ -21,11 +21,12 @@ Route::get('/mypay',function(){
     return Stripe::customers()->find(Auth::user()->customer_id)['subscriptions']['data'][0]['items']['data'][0]['plan']['name'];
 });
 Route::get('/clear-cache', function() {
+    Artisan::call('config:cache');
+    Artisan::call('config:clear');
     Artisan::call('cache:clear');
     // return what you want
     Artisan::call('route:clear');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
+
     Artisan::call('view:clear');
 });
 
