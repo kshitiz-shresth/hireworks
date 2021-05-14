@@ -57,9 +57,10 @@ class AdminTeamController extends AdminBaseController
 
         //attach role
         $user->roles()->attach($request->role_id);
-        $user['password'] = $request->password;
-        Mail::send('emails.team-creation', $user, function ($message) use ($user) {
-            $message->to($user['email']);
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
+        Mail::send('emails.team-creation', $data, function ($message) use ($data) {
+            $message->to($data['email']);
             $message->subject('Username & Password');
         });
         //send notification
