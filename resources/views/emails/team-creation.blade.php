@@ -10,6 +10,6 @@
     Your Data Credentials<br>
     Email : {{ $email }} <br>
     Password : {{ $password }} <br>
-    Please Visit: <a href="{{ env('APP_URL') }}">{{ env('APP_URL') }}</a>
+    Please Visit: <a target="_blank" href="https://app.hireworks.ai">https://app.hireworks.ai/</a>
 </body>
 </html>
