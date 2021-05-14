@@ -41,13 +41,16 @@ class AdminTeamController extends AdminBaseController
 
     public function store(StoreTeam $request){
         abort_if(! $this->user->can('add_team'), 403);
-
+        
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->company_id = $this->user->company_id;
-        
+        $user->customer_id = $this->user->customer_id;
+        $user->stripe_id = $this->user->stripe_id;
+        $user->package = $this->user->package;
+        $user->trial_ends_at = $this->user->trial_ends_at;
         if ($request->hasFile('image')) {
             $user->image = $request->image->hashName();
             $request->image->store('user-uploads/profile');
