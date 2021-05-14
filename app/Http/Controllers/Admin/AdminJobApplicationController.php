@@ -392,7 +392,7 @@ class AdminJobApplicationController extends AdminBaseController
 
 
         $totalQuestion = JobApplicationAnswer::where('job_application_id',$application_id)->count();
-        $totalMarks = $totalQuestion * 3;
+        $totalMarks = $totalQuestion * 5;
 
 
 
