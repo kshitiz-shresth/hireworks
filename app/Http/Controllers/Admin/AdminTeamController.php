@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTeam;
 use App\Http\Requests\UpdateTeam;
 use App\Notifications\NewUser;
 use App\Role;
+use Illuminate\Support\Facades\Mail;
 use App\RoleUser;
 use App\User;
 use Illuminate\Http\Request;
@@ -56,9 +57,13 @@ class AdminTeamController extends AdminBaseController
 
         //attach role
         $user->roles()->attach($request->role_id);
-
+        $user['password'] = $request->password;
+        Mail::send('emails.team-creation', $user, function ($message) use ($user) {
+            $message->to($user['email']);
+            $message->subject('Username & Password');
+        });
         //send notification
-        $user->notify(new NewUser($request->password));
+        // $user->notify(new NewUser($request->password));
 
         return Reply::redirect(route('admin.team.index'), __('menu.team').' '.__('messages.createdSuccessfully'));
     }
