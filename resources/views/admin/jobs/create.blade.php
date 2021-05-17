@@ -126,15 +126,15 @@
                                     <input type="text" class="form-control" name="salary" id="salary" placeholder="e.g. $80,000">
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">@lang('menu.locations')</label>
                                     <select name="country" id="country"
                                             class="form-control select2 custom-select">
-                                        <option value="">Select Country</option> 
+                                        <option value="">Select Country</option>
                                         @foreach($countries as $country)
-                                            <option value="{{ $country->country_name }}">{{ ucfirst($country->country_name) }}</option>        
+                                            <option value="{{ $country->country_name }}">{{ ucfirst($country->country_name) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -163,7 +163,7 @@
                                 <div class="form-group">
                                     <label>@lang('menu.skills')</label>
                                     <input  id="job_skills" style="width: 100% !important;" name="job_skills">
-                                    <p>Press "Enter" Key to add Skills</p> <br/>
+                                    <p>Type a skill and press 'Enter' key to add skills</p> <br/>
                                 </div>
                             </div>
 
@@ -178,11 +178,11 @@
                                 <div class="form-group">
                                     <label for="address">@lang('app.endDate')</label>
                                     <input type="text" class="form-control" id="date-end" name="end_date" value="{{ \Carbon\Carbon::now()->addMonth(1)->format('Y-m-d') }}">
-                                   
+
                                 </div>
                             </div>   --}}
 
-                            
+
 
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -237,9 +237,9 @@
 
                             </div>
 
-                           
 
-                            
+
+
 
                             <div class="col-md-12 questionDiv" style="display:none">
                                 <table class="table table-bordered qtbl">
@@ -282,7 +282,7 @@
       <!-- Modal body -->
       <div class="modal-body">
       <div class="row modalbody">
-     
+
            </div>
       </div>
 
@@ -299,7 +299,7 @@
 <div class="modal" id="myModalX">
   <div class="modal-dialog">
     <div class="modal-content">
-    
+
     <form class="ajax-form" method="POST" id="customQuestion">
     @csrf
 
@@ -316,10 +316,10 @@
                 <div class="form-group">
                     <label for="address">Write your question here</label>
                     <input name="question" id="question" class="form-control" placeholder="Write your question here"></textarea>
-                                        
+
                 </div>
             </div>
-                                    
+
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="address">Question Type</label>
@@ -331,7 +331,7 @@
                     </select>
                 </div>
             </div>
-                                    
+
             <div class="col-md-12" >
                 <div class="form-group multiple-choice-div" style="display:none">
                     <div class="answerParentDiv">
@@ -340,13 +340,13 @@
                                 <input class="form-control Multiple" name="multiple[    ]" type="text" placeholder="Enter answer" /><br />
                             </div>
                             <div class="col-md-1 removeDivInter">
-                                
+
                             </div>
                         </div>
                     </div>
                     <a style="cursor:pointer;color:#0151ce" onclick="addAnswer.call(this)" class="addAnswer"><span class="fa fa-plus"></span> <b>Add Answer</b></a>
                 </div>
-                
+
             </div>
 
             <div class="col-md-9">
@@ -355,7 +355,7 @@
                     <input type="number" name="time_limit"  class="form-control time_input" placeholder="e.g. 5"></input>
                 </div>
             </div>
-                                    
+
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="address">@lang('app.required')</label>
@@ -367,14 +367,14 @@
             </div>
       </div
 
-     
+
 
       <!-- Modal footer -->
       <div class="modal-footer">
       <button type="button" class="btn btn-success" id="mSave">Add</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
-    </form>    
+    </form>
     </div>
   </div>
 </div>
@@ -391,9 +391,9 @@
     <script src="{{ asset('assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/node_modules/multiselect/js/jquery.multi-select.js') }}"></script>
     <script src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.tagsinput.js') }}"></script>  
-    
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+    <script src="{{ asset('js/jquery.tagsinput.js') }}"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $('tbody').sortable();
 
@@ -407,7 +407,7 @@
         $("#plusCButton").on('click',function(){
             $("#question").val("")
             $("#question_type").val("Text")
-           
+
             $("#required").val("yes")
             $(".multiple-choice-div").css("display","none")
             $(".time_limit").css("display","none")
@@ -447,7 +447,7 @@
 
         });
 
-   
+
 
         $('#save-form').click(function () {
             $.easyAjax({
@@ -506,16 +506,16 @@
             }else {
                 $(".time_limit").css("display","none")
             }
-            
+
         }
 
 
         function addQuestion(id){
             $("#myModal").modal('hide')
             $(".questionDiv").css("display","block")
-            
+
             var url = '/admin/assessments/fetchAssessementQuestion?id='+id
-            
+
 
             $.easyAjax({
                 type: 'GET',
@@ -540,7 +540,7 @@
             $("#"+id).remove();
         }
 
-        
+
         function editQuestion(id){
            $("#myModalX").modal('show')
 
@@ -556,7 +556,7 @@
             var tdLength = $(".qtblBody tr").length
 
             $(".questionDiv").css("display","block")
-            
+
 
             var tbbb = '<tr><td class="text-center"><i class="pull-left fa fa-sort fa-lg" aria-hidden="true"></i>'+(tdLength+1)+'</td>'+
             '<td>'+question+'</td><td class="text-center">'+question_type+'</td>'+
@@ -576,26 +576,26 @@
         })
 
         function addAnswer(){
-        
+
             var answerLength = $(".answerDiv").length
-            
+
             var ansLength = answerLength + 1
             var newName = "multiple["+ansLength +"]"
             var clone = $( ".answerDiv:first").clone(true).find("input").val("").end()
             clone.find('.Multiple').prop('name', newName);
             clone.find(".removeDivInter").append('<span style="font-size:30px;margin-top:7px;cursor:pointer;color:red;" onclick="removeAnswer($(this))" class="fa fa-times-circle-o fa-lg removeAnswer"></span> </br>')
             clone.appendTo(".answerParentDiv");
-            
+
         }
 
         function removeAnswer(obj){
             obj.parent().parent().remove()
         }
-       
+
         $("#plusButton").on('click',function(){
             $("#myModal").modal('show')
             var url = '/admin/assessments/fetchassessments'
-            
+
             $.easyAjax({
                 type: 'GET',
                 url: url,

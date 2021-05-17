@@ -323,7 +323,7 @@ input:checked + .slider:before {
                                 <div class="form-group">
                                     <label>@lang('menu.skills')</label>
                                     <input value="{{$job->skills}}"  id="job_skills" style="width: 100% !important;" name="job_skills">
-                                    <p>Press "Enter" Key to add Skills</p> <br/>
+                                    <p>Type a skill and press 'Enter' key to add skills</p> <br/>
                                 </div>
                             </div>
 

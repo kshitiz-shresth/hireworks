@@ -30,7 +30,7 @@
                     <div id="create-new-button">
                         @permission('add_jobs')
                             <button data-toggle="modal" data-target="#addJob" class="btn btn-sm btn-primary pull-right" type="button">
-                                <img src="/assets/create.png" alt=""> 
+                                <img src="/assets/create.png" alt="">
                                    Create New
                             </button>
                         @endpermission
@@ -40,7 +40,7 @@
                         <button class="buttons {{ Request::segment(2)=='jobs' ? 'active' : '' }}" >
                             <a href="/admin/jobs">
                                 <i class="fa fa-suitcase fa-lg main-icon-1"></i>
-                                <p class="main_text">All Jobs</p> 
+                                <p class="main_text">All Jobs</p>
                             </a>
                         </button>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="col-md-12 mb-20">
                         <h3 class="pull-left">All Jobs</h3>
 
-                        
+
 
 
                     </div>
@@ -213,19 +213,21 @@
 
     $(document).on('click', '.jobCheckBox', function() {
         var jobChecked=$(this).prop("checked");
+        var jobID = $(this).data('id');
         $.easyAjax({
                 url: '/admin/jobs/changeStatus',
                 type: "GET",
                 data: { 'id' : $(this).data('id'), 'checked': $(this).prop("checked") },
                 success: function(data){
-                    if(jobChecked){
-                        $('#activeOrInactive').text('Active');
+
+                    if(!jobChecked){
+                        $(`#activeOrInactive${jobID}`).text('InActive');
                     }
                     else{
-                        $('#activeOrInactive').text('Inactive');
+                        $(`#activeOrInactive${jobID}`).text('Active');
                     }
             }
-        });       
+        });
 
         // if ($(this).prop("checked")) {
         //     console.log(`checked ${$(this).data('id')}`);
