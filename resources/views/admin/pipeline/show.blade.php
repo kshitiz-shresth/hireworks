@@ -132,7 +132,7 @@
         <ul>
             <li><a href="#tabs-1">Basic Info</a></li>
             <li><a href="#tabs-2">Resume / CV</a></li>
-            <li><a href="#tabs-3">Questionnaires</a></li>
+            <li><a href="#tabs-3">Assessment</a></li>
             <li><a href="#tabs-4">Attachments</a></li>
         </ul>
         <div id="tabs-1">
@@ -443,7 +443,7 @@
                 <div class="comment-box">
                     <div class="user-box">
                     <span class="user-img">
-                        <img src="/avatar.png" alt="">
+                        <img src="{{ $item->user->image ? '/user-uploads/profile/'.$item->user->image : '/avatar.png'  }} " alt="">
                     </span>
                         <div class="user-section">
                             <span class="user-name">{{$item->user->name}}</span>
