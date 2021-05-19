@@ -191,7 +191,7 @@
         $('#apply-filters').click(function () {
             tableLoad('filter');
         });
-        
+
         function tableLoad(type) {
 
             var status = $('#status').val();
@@ -290,7 +290,7 @@
             $('#modelHeading').html('Schedule');
             $.ajaxModal('#scheduleDetailModal', url);
         }
-        
+
         $('.toggle-filter').click(function () {
             $('#ticket-filters').toggle('slide');
         });

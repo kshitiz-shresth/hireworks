@@ -20,4 +20,8 @@ class JobApplication extends Model
     public function schedule(){
         return $this->hasOne(InterviewSchedule::class)->latest();
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class,'job_application_id');
+    }
 }

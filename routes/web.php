@@ -52,6 +52,8 @@ Route::post('/submit-attachments','AttachmentsController@update');
 
 Route::post('/import-assessments','AssessmentController@import');
 
+Route::post('comment','CommentController@store');
+
 Route::post('/show-details','TemporaryUserController@index');
 Route::get('/show-details', 'TemporaryUserController@getIndex');
 Route::group(

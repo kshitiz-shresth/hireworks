@@ -352,10 +352,10 @@
                     <input type="hidden" name="id" value="{{ $application->id }}">
                     <div class="col-12 mt-2">
                         <button id="submitAttachments" type="submit" class="btn btn-success">Submit</button>
-                    </div>         
+                    </div>
                 </div>
           </form>
-           
+
       </div>
     </div>
 

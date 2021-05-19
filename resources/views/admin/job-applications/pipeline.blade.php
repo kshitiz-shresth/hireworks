@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <a href="javascript:;" id="toggle-filter" class="btn btn-outline btn-danger btn-sm toggle-filter"><i
                                             class="fa fa-sliders"></i> @lang('app.filterResults')</a>
-                                            
+
                             </div>
                         </div>
                         <div class="col-md-6">
