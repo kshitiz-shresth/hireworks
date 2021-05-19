@@ -484,7 +484,7 @@
                     $('#myFile').val(null);
                     $("#fileSection").append(`<p>${response.name}: <a href="/user-uploads/attachments/${response.location}" target="_blank" style="color:#1b5dd0;text-decoration:underline">Download</a></p>`);
                     swal({
-                        title: "Successfull!",
+                        title: "Successful!",
                         text: `${response.name} has been successfully uploaded`,
                         type: "success"
                     });
@@ -600,7 +600,7 @@
 
                     $('#user-comments').append(`<div class="comment-box"><div class="user-box"><span class="user-img"><img src="/avatar.png" alt=""></span><div class="user-section"><span class="user-name">${response.user_name}</span><span class="time">Just Now</span></div></div><div class="comment"><p>${response.comment}</p></div></div>`);
                     swal({
-                        title: "Succeed!",
+                        title: "Successful!",
                         text: "Comment added Successfully",
                         type: "success"
                     });
