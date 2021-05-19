@@ -484,7 +484,7 @@
                     $('#myFile').val(null);
                     $("#fileSection").append(`<p>${response.name}: <a href="/user-uploads/attachments/${response.location}" target="_blank" style="color:#1b5dd0;text-decoration:underline">Download</a></p>`);
                     swal({
-                        title: "Succeed!",
+                        title: "Successfull!",
                         text: `${response.name} has been successfully uploaded`,
                         type: "success"
                     });
