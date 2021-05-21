@@ -12,7 +12,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <style>
-
+    .checked{
+      color: orange;
+    }
     .right-panel-box {
         overflow-x: scroll;
         max-height: 34rem;
@@ -77,6 +79,10 @@
     /* Show the checkmark when checked */
     .containerLab input:checked ~ .checkmark:after {
         display: block;
+    }
+
+    .myStrong{
+        font-weight: 600;
     }
 
     /* Style the checkmark/indicator */
@@ -357,18 +363,33 @@
         <div id="tabs-4">
             <div class="col-sm-12">
                 <div id="fileSection">
-                    @if($application->cover_letter)
-                        <p>Cover Letter: <a href="/user-uploads/cover-letters/{{ $application->cover_letter }}"
-                                            target="_blank" style="color:#1b5dd0;text-decoration:underline !important;">Download</a>
-                        </p>
-                    @endif
-                    @if($application->attachments)
-                        @foreach (json_decode($application->attachments) as $item)
-                            <p>{{ $item->name }}: <a href="/user-uploads/attachments/{{ $item->location }}"
-                                                     target="_blank" style="color:#1b5dd0;text-decoration:underline">Download</a>
+                    <div class="attachments d-flex justify-content-between">
+                        <div class="user">
+                            <p class="myStrong">Attachments By User</p>
+                        @if($application->resume)
+                            <p>CV/Resume: <a href="/user-uploads/cover-letters/{{ $application->resume }}"
+                                                target="_blank" style="color:#1b5dd0;text-decoration:underline !important;">Download</a>
                             </p>
-                        @endforeach
-                    @endif
+                        @endif
+                        @if($application->cover_letter)
+                            <p>Cover Letter: <a href="/user-uploads/cover-letters/{{ $application->cover_letter }}"
+                                                target="_blank" style="color:#1b5dd0;text-decoration:underline !important;">Download</a>
+                            </p>
+                        @endif
+                        </div>
+                        <div class="employeer">
+                            <p class="myStrong">Attachments By Employeer</p>
+                        @if($application->attachments)
+                            @foreach (json_decode($application->attachments) as $item)
+                                <p>{{ $item->name }}: <a href="/user-uploads/attachments/{{ $item->location }}"
+                                                         target="_blank" style="color:#1b5dd0;text-decoration:underline">Download</a>
+                                </p>
+                            @endforeach
+                        @endif
+                        </div>
+                    </div>
+                    
+
                 </div>
                 <form id="attachmentsUpload" action="/submit-attachments" method="POST">
                     @csrf
@@ -437,7 +458,17 @@
     </div>
     <div class="ui-tabs ui-widget ui-widget-content ui-corner-all mt-3">
         <div class="comment-sections">
-            <h4>Comments</h4>
+            <p>Resume Score:
+                @for($i=1; $i<=5; $i++)
+                <span class="fa fa-star {{ $application->rating >= $i ? 'checked' : '' }}"></span>
+                @endfor</p>
+            <p>Assessment Score:
+                @for($i=1; $i<=5; $i++)
+                <span class="fa fa-star {{ round(($application->score_percent/100)*5) >= $i ? 'checked' : '' }}"></span>
+                @endfor
+            </p>
+            <p>Pipeline Status: <strong class="myStrong">{{ ucfirst($application->status->status) }}</strong></p>
+            <h4>Reviews</h4>
             <div id="user-comments">
                 @foreach($application->comments as $item)
                 <div class="comment-box">

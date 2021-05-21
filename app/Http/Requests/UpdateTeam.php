@@ -26,7 +26,7 @@ class UpdateTeam extends CoreRequest
         return [
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$this->route('team'),
-            'image' => 'image|max:2048'
+            'image' => 'mimes:jpeg,jpg,png,gif|max:2048'
         ];
     }
 }

@@ -27,7 +27,7 @@ class StoreTeam extends CoreRequest
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
-            'image' => 'image|max:2048'
+            'image' => 'mimes:jpeg,jpg,png,gif|max:2048'
         ];
     }
 }
