@@ -38,43 +38,42 @@ class AdminDashboardController extends AdminBaseController
     }
 
     public function index(){
-        $this->customerId = $this->user->customer_id;
         if($this->user->email=="super@super.com"){
             return redirect('admin/assessments');
         }
 
-        if($this->user->package!='free'){
-            $allPlans = Stripe::invoices()->all(array("customer" => $this->customerId));
-            // if first time registration
-            if(isset($allPlans['data']) && !$allPlans['data'])
-            {
-                $amountDue = Stripe::plans()->find($this->user->package)['amount'];
-                return view('admin.dashboard.pay',compact(
-                    'amountDue'
-                ));
-            }
-            if((isset($allPlans['data'][0]['paid']) && !$allPlans['data'][0]['paid'])){
-                $amountDue = $allPlans['data'][0]['amount_remaining'];
-                return view('admin.dashboard.pay',compact(
-                    'amountDue'
-                ));
-            }
+        // if($this->user->package!='free'){
+        //     $allPlans = Stripe::invoices()->all(array("customer" => $this->customerId));
+        //     // if first time registration
+        //     if(isset($allPlans['data']) && !$allPlans['data'])
+        //     {
+        //         $amountDue = Stripe::plans()->find($this->user->package)['amount'];
+        //         return view('admin.dashboard.pay',compact(
+        //             'amountDue'
+        //         ));
+        //     }
+        //     if((isset($allPlans['data'][0]['paid']) && !$allPlans['data'][0]['paid'])){
+        //         $amountDue = $allPlans['data'][0]['amount_remaining'];
+        //         return view('admin.dashboard.pay',compact(
+        //             'amountDue'
+        //         ));
+        //     }
 
-            $this->expiryDate = date('Y-m-d',Stripe::invoices()->upcomingInvoice($this->customerId)['period_end']);
+        //     $this->expiryDate = date('Y-m-d',Stripe::invoices()->upcomingInvoice($this->customerId)['period_end']);
 
-            $this->subscription = Stripe::customers()->find($this->customerId)['subscriptions']['data'][0];
-            // $subscription = Stripe::subscriptions()->update($this->customerId, $this->subscription['id'], [
-            //     'plan' => 'premium',
-            // ]);
+        //     $this->subscription = Stripe::customers()->find($this->customerId)['subscriptions']['data'][0];
+        //     // $subscription = Stripe::subscriptions()->update($this->customerId, $this->subscription['id'], [
+        //     //     'plan' => 'premium',
+        //     // ]);
 
-             $this->invoices =  Stripe::invoices()->upcomingInvoice($this->customerId)['lines']['data'];
-             $this->amountPaid = $allPlans['data'][0]['amount_paid'];
-        }
+        //      $this->invoices =  Stripe::invoices()->upcomingInvoice($this->customerId)['lines']['data'];
+        //      $this->amountPaid = $allPlans['data'][0]['amount_paid'];
+        // }
 
-        $client = new Client();
-        $res = $client->request('GET', config('laraupdater.update_baseurl').'/laraupdater.json');
-        $lastVersion = $res->getBody();
-        $lastVersion = json_decode($lastVersion, true);
+        // $client = new Client();
+        // $res = $client->request('GET', config('laraupdater.update_baseurl').'/laraupdater.json');
+        // $lastVersion = $res->getBody();
+        // $lastVersion = json_decode($lastVersion, true);
         $this->company_id = $this->user->company_id;
         $this->first_time_login = CompanySetting::where('id', $this->user->company_id)->first()->first_time_login;
 
@@ -84,10 +83,10 @@ class AdminDashboardController extends AdminBaseController
             $this->inactiveCompanies = 0;// CompanySetting::where('status', 'inactive')->count();
         }else{
 
-              if (version_compare($lastVersion['version'], File::get('version.txt')) > 0)
-        {
-            $this->lastVersion = $lastVersion['version'];
-        }
+        //       if (version_compare($lastVersion['version'], File::get('version.txt')) > 0)
+        // {
+        //     $this->lastVersion = $lastVersion['version'];
+        // }
         $this->totalOpenings = Job::where('company_id', $this->user->company_id)->count();
         $this->totalCompanies = Company::count();
         $this->totalApplications = JobApplication::join('jobs', 'jobs.id', '=', 'job_applications.job_id')->where('company_id', $this->user->company_id)->count();

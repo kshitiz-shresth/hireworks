@@ -10,19 +10,38 @@
     <link rel="stylesheet" type="text/css" href="/payment-assets/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/payment-assets/css/demo.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
+    @php
+        $price = [
+            'plus' => '$29 USD',
+            'premium' => '$79 USD',
+        ];
+        $plan = session('package') ?? (request('plan') ?? '');
+        $price = $price[$plan];
+    @endphp
     <div class="container-fluid">
         <div class="creditCardForm">
+
             <div class="heading">
                 <h1>Confirm Purchase</h1>
             </div>
+            <div style="display: flex;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 600;">
+                <p style="    background: #286090;
+                padding: 3px 11px;
+                color: #fff;
+                border-radius: 21px;">Plan: {{ ucfirst($plan) }} ({{ $price }})</p>
+            </div>
             <div class="payment">
-                <form>
-                    <input type="hidden" name="stripe_id" id="stripe_id" value="{{ Auth::user()->customer_id }}">
-                    <input type="hidden" name="package" id="package" value="{{ request('plan') ?? Auth::user()->package }}">
+                <form id="paymentForm">
+
+                    <input type="hidden" name="package" id="package"
+                        value="{{ session('package') ?? (request('plan') ?? '') }}">
                     <div class="form-group owner">
                         <label for="owner">Owner</label>
                         <input type="text" class="form-control" id="owner">
@@ -52,7 +71,7 @@
                             <option value="12">December</option>
                         </select>
                         <select id="yy">
-                            @for($i=16; $i<=40; $i++)
+                            @for ($i = 16; $i <= 40; $i++)
                                 <option value="{{ $i }}"> 20{{ $i }}</option>
                             @endfor
                         </select>
@@ -73,6 +92,11 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+        Stripe.setPublishableKey("{{ env('STRIPE_KEY') }}");
+
+    </script>
     <script src="/payment-assets/js/jquery.payform.min.js" charset="utf-8"></script>
     <script src="/payment-assets/js/script.js"></script>
 </body>

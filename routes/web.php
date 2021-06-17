@@ -47,6 +47,7 @@ Route::post('/upgrade','PaymentController@upgrade');
 Route::post('/pay-with-stripe','PaymentController@addCard');
 
 
+
 Route::get('/createPlan','PaymentController@createPlan');
 Route::post('/submit-attachments','AttachmentsController@update');
 
@@ -77,10 +78,18 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     Route::post('mark-notification-read', ['uses' => 'NotificationController@markAllRead'])->name('mark-notification-read');
-
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'],function(){
+        Route::get('pay','PaymentController@index')->name('pay');
+        Route::post('cancel-plan','PaymentController@cancelPlan')->name('cancel-plan');
+        Route::post('change-plan','PaymentController@changePlan')->name('change-plan');
+        Route::post('resubscribe-plan','PaymentController@resubscribePlan')->name('resubscribe-plan');
+        Route::post('pay','PaymentController@updateCard')->name('update-card');
+        Route::get('free-trial-expired','PaymentController@freeTrialExpired')->name('free-trial-expired');
+    }
+);
     // Admin routes
     Route::group(
-        ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],
+        ['namespace' => 'Admin', 'middleware'=>'subscribed', 'prefix' => 'admin', 'as' => 'admin.'],
         function () {
             Route::get('/library','AdminDashboardController@library');
             Route::get('/dashboard', 'AdminDashboardController@index')->name('dashboard');
@@ -121,6 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
                     Route::post('role-permission/storeRole', ['as' => 'role-permission.storeRole', 'uses' => 'ManageRolePermissionController@storeRole']);
                     Route::post('role-permission/deleteRole', ['as' => 'role-permission.deleteRole', 'uses' => 'ManageRolePermissionController@deleteRole']);
                     Route::get('role-permission/showMembers/{id}', ['as' => 'role-permission.showMembers', 'uses' => 'ManageRolePermissionController@showMembers']);
+                    Route::get('payment-settings',['as'=>'payment-setting.index','uses' => 'PaymentSettingController@index']);
                     Route::resource('role-permission', 'ManageRolePermissionController');
 
                     //language settings

@@ -11,6 +11,6 @@
     Email : {{ $email }} <br>
     Password : {{ $password }} <br>
     Your email will expire on {{ $expiry_date }}
-    Please Visit: {{ env('APP_URL').'/temp-login' }}
+    Please Visit: <a target="_blank" href="https://app.hireworks.ai/temp-login">app.hireworks.ai/temp-login</a>
 </body>
 </html>

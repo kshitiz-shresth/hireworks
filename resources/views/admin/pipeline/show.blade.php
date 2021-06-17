@@ -362,7 +362,7 @@
 
         <div id="tabs-4">
             <div class="col-sm-12">
-                <div id="fileSection">
+                <div >
                     <div class="attachments d-flex justify-content-between">
                         <div class="user">
                             <p class="myStrong">Attachments By User</p>
@@ -377,8 +377,8 @@
                             </p>
                         @endif
                         </div>
-                        <div class="employeer">
-                            <p class="myStrong">Attachments By Employeer</p>
+                        <div class="employeer" id="fileSection">
+                            <p class="myStrong">Attachments By {{ $user->company->company_name }}</p>
                         @if($application->attachments)
                             @foreach (json_decode($application->attachments) as $item)
                                 <p>{{ $item->name }}: <a href="/user-uploads/attachments/{{ $item->location }}"

@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Cashier\Billable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
-    use Billable;
+
     protected $guarded = [];
     // protected $fillable = [
     //     'name', 'email', 'password', 'image','company_id','customer_id', 'package'
@@ -47,7 +46,7 @@ class User extends Authenticatable
     }
 
     public function company(){
-        return $this->belongsTo(\App\Company::class,'company_id');
+        return $this->belongsTo(CompanySetting::class,'company_id');
     }
 
     public static function allAdmins($exceptId = NULL)

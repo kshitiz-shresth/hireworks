@@ -8,15 +8,51 @@ use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Cartalyst\Stripe\Api\Customers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-
-    public function upgrade(){
-           $subscription = Stripe::subscriptions()->update($this->customerId, $this->subscription['id'], [
-            'plan' => 'premium',
-        ]);
+    public function freeTrialExpired(Request $request){
+        if($request->user()->trial_ends_at){
+            return view('admin.dashboard.free-trial-finished');
+        }
+        abort('404');
     }
+
+    public function changePlan(Request $request){
+        $user =  $request->user();
+        $plan = $request->plan;
+        $subscription = Stripe::subscriptions()->update($user->stripe_id, $user->subscription_id, [
+            'plan' => $plan,
+        ]);
+        $user->package = $plan;
+        $user->update();
+        return 'done';
+    }
+
+    public function cancelPlan(Request $request){
+        $user =  $request->user();
+        $subscription = Stripe::subscriptions()->cancel($user->stripe_id, $user->subscription_id,true);
+        $user->ends_at = date('Y-m-d H:i:s', $subscription['current_period_end']);;
+        $user->update();
+        return 'done';
+    }
+
+    public function resubscribePlan(Request $request){
+        $user =  $request->user();
+        $subscription = Stripe::subscriptions()->reactivate($user->stripe_id, $user->subscription_id);
+        if($user->ends_at){
+            $user->ends_at=null;
+            $user->update();
+        }
+        Session::flash('success','Congratulations');
+        return 'done';
+    }
+
+    public function index(){
+        return view('admin.dashboard.pay');
+    }
+
     public function test() {
 //        $this->addCard();
 //        $this->addSubscription('cus_JCKkDen88LosGG', 'annual');
@@ -29,38 +65,34 @@ class PaymentController extends Controller
 
     }
 
+    /**
+     * create customer
+     */
+
  
     /**
      * add payment method with card
      */
     public function addCard(Request $request){
-        $stripeCustomerId = $request->stripe_id;
+            $token = $request->cc_token;
+            $package = $request->package;
+            // creating customer
+            $customer = Stripe::customers()->create([
+                'email' => $request->user()->email,
+            ]);
+            $stripeCustomerId = $customer['id'];
 
-        // return $request;
-        // Log::debug($request->all());
-
-        try {
-            $token = Stripe::tokens()->create(array(
-                "card" => array(
-                    "number" => $request->number,
-                    "exp_month" => $request->mm,
-                    "exp_year" => $request->yy,
-                    "cvc" => $request->cvc
-                )
-            ));
 
             if($token) {
                 // add card for the respective stripe customer
-                $card = Stripe::cards()->create($stripeCustomerId, $token['id']);
+                $card = Stripe::cards()->create($stripeCustomerId, $token);
                 // Log::debug($card);
 
 
                 if ($card) {
                     // add subscription to the plan if card exist
-                    $this->addSubscription($stripeCustomerId, $request->package);
-                    $user = Auth::user();
-                    $user->package = $request->package;
-                    $user->update();
+                   $subscriptionId = $this->addSubscription($stripeCustomerId, $request->package);
+
                 }
 
                 // to get all invoices
@@ -72,21 +104,24 @@ class PaymentController extends Controller
                         $invoice = Stripe::invoices()->pay($allPlans['data'][0]['id']);
                     }
                 }
-                return redirect('/admin/dashboard')->with('success','Plan activated');
-
+                $user = $request->user();
+                $user->stripe_id = $stripeCustomerId;
+                $user->subscription_id = $subscriptionId;
+                $user->package = $package;
+                $user->card_brand = $request->brand;
+                $user->card_last_four = $request->last4;
+                $user->card_id = $request->cardId;
+                if($user->trial_ends_at){
+                    $user->trial_ends_at = null;
+                }
+                $user->update();
                 return response()->json([
                     'success' => true,
                     'data' => $card,
                     'message' => 'Successfully setup payment information'
                 ], 200);
             }
-        } catch (\Exception $e){
-            return response()->json([
-                'success' => true,
-                'message' => 'Your card information is incorrect.'
-            ], 404);
-        }
-    }
+    } 
 
     // adding subscription to the any plan
     public function addSubscription($customerId, $plan) {
@@ -95,7 +130,7 @@ class PaymentController extends Controller
         ]);
 
 
-        return $subscription;
+        return $subscription['id'];
     }
 
     // creating plus plan
