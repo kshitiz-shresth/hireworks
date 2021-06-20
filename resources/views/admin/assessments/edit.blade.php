@@ -162,9 +162,9 @@
                     @if($assessmentq->count() > 0)
                     @foreach($assessmentq as $aq)
                     @if($inds == 1)
-                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-5" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-3" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
                     @else
-                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show p-5" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show p-3" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
                     @endif
 
 
@@ -312,7 +312,7 @@
                     <?php $inds = $inds + 1; ?>
                     @endforeach
                     @else
-                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-5" id="question1" role="tabpanel" aria-labelledby="question1-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-3" id="question1" role="tabpanel" aria-labelledby="question1-tab">
                         <h4 class="font-italic mb-4">Question 1</h4>
                         <p class="font-italic text-muted mb-2">
                         <form class="ajax-form" method="POST" id="createForm1">
@@ -448,7 +448,7 @@
 
         '</a>'
 
-        var question_body = '<div class="tab-pane fade shadow rounded bg-white show p-5" '+
+        var question_body = '<div class="tab-pane fade shadow rounded bg-white show p-3" '+
                             'id="question'+indexs+'" role="tabpanel" aria-labelledby="question'+indexs+'-tab">'+
                             '<h4 class="font-italic mb-4">Question '+indexs+'</h4>'+
                         '<p class="font-italic text-muted mb-2">'+

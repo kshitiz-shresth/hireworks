@@ -167,7 +167,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="assessment_name">Assessment Name</label>
-                                    <input class="form-control" type="text" name="assessment_name" id="assessment_name" /><br />
+                                    <input class="form-control" required type="text" name="assessment_name" id="assessment_name" /><br />
                                 </div>
 
                                 <div class="form-group">
@@ -179,7 +179,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" id="save-form" class="btn btn-success">Create Assessment</button>
+                                <button type="submit" id="save-form" class="btn btn-success">Create Assessment</button>
                                 <button type="button" onclick="emptyAssessment();" class="btn btn-danger"
                                     data-dismiss="modal">Cancel</button>
                             </div>
@@ -331,7 +331,8 @@
                     });
                 });
 
-                $('#save-form').click(function() {
+                $('#createForm').submit(function(e) {
+                    e.preventDefault();
                     loadLoader('#createForm', "Loading...")
                     $.ajax({
                         url: '{{ route('admin.assessments.saveAssessment') }}',
