@@ -24,7 +24,7 @@ class StoreRequest extends CoreRequest
     public function rules()
     {
         return [
-           // "question"    => "required",
+        //    "question"    => "required",
         ];
     }
 }

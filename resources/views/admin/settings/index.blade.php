@@ -56,6 +56,12 @@
                                 <p class="main_text">@lang('menu.rolesPermission')</p> 
                             </a>
                         </button>
+                        <button class="buttons {{ Request::segment(3)=='role-permission' ? 'active' : '' }}" >
+                            <a href="{{ route('admin.payment-setting.index') }}">
+                                <i class="fa fa-dollar fa-lg main-icon-1"></i>
+                                <p class="main_text">Payment & Methods</p> 
+                            </a>
+                        </button>
                     </div>
                 </div>
             </div>

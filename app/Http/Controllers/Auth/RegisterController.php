@@ -9,6 +9,7 @@ use App\RoleUser;
 
 use App\ThemeSetting;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -103,28 +104,23 @@ class RegisterController extends Controller
         $company->status = "active";
         $company->show_in_frontend = "true";
         $company->save();
-        
-        $stripe = Stripe::make('sk_test_51Iac4qAwycdZAiddeVZFq4YnJccuo2KEgITVFAIxpNMmSxDKjV12aKC0bQVyVF3h6h66lgDqWmyjr7vzL5iLzKIP00mZXCSReZ');
-        $customer = $stripe->customers()->create([
-            'email' => $data['email'],
-            'description' => $data['name']
-        ]);
-        $customerID = $customer['id'];
+        if($data['package']=='free'){
+            session(['link'=>'admin/dashboard']);
+        }
+        else{
+            session(['link'=>'admin/pay','package'=>$data['package']]);
+        }
+
         $usr =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'company_id' => $setting->id,
-            'customer_id' => $customer['id'],
-            'stripe_id' => $customer['id'],
-            'package' => $data['package'],
-            'trial_ends_at' => now()->addDays(7)
         ]);
-        // if($data['package']=='free'){
-        //     Stripe::subscriptions()->create($customerID, [
-        //         'plan' => $data['package'],
-        //     ]);
-        // }
+        if($data['package']=='free'){
+            $usr->trial_ends_at = Carbon::now()->addDays(7);
+            $usr->update();
+        }
         $role =  RoleUser::create([
             'user_id' => $usr->id,
             'role_id' => 1
@@ -135,5 +131,10 @@ class RegisterController extends Controller
         
         
         return $usr;
+    }
+
+    protected function redirectTo()
+    {
+        return session('link');
     }
 }

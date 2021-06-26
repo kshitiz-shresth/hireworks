@@ -236,12 +236,12 @@
                 if ($user->trial_ends_at) {
                     // if trial hasBeen Ended
                     $trialHasEnded = isFuture($user->trial_ends_at);
-                    $remainingDays = now()->diffInDays($user->trial_ends_at, false) + 1;
+                    $remainingDays = now()->diffInDays($user->trial_ends_at, false);
                 }
             @endphp
-            @if ($user->package == 'free')
+            @if ($user->trial_ends_at)
                 <div class="alert alert-warning mb-0" role="alert">
-                    You have {{ $remainingDays }} days Free Trial left, Please <a data-toggle="modal"
+                    You have {{ now()->diffInDays($user->trial_ends_at, false)+1 }} days Free Trial left, Please <a data-toggle="modal"
                         data-target="#upgradePlanFromFreeToOthers" href="#">upgrade</a> your plan.
                 </div>
             @endif

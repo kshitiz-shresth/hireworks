@@ -3,6 +3,9 @@
 @section('content')
 
 <style>
+    .greetings-box{
+        display:none!important;
+    }
     .content-header{
         display:none;
     }
@@ -92,14 +95,9 @@
 
 </style>
 
-    <div class="row up_header">
-            <div class="col-md-6 mb-20">
-                <h3>{{$assessment_name}}</h3>
-            </div>
-
-            <div class="col-md-6 mb-20">
-            <a href="{{route('admin.assessments.index')}}" class="btn btn-primary pull-right"> Back &nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-            </div>
+    <div class="row up_header d-flex align-items-center">
+        <a href="{{route('admin.assessments.index')}}"> <i class="fa fa-arrow-left"></i></a>
+        <h4 class="mb-0 ml-2">{{$assessment_name}}</h4></div>
     </div>
     <hr />
 
@@ -109,15 +107,15 @@
     <div class="py-4">
 
         <div class="row">
-            <div class="col-md-3" style="height:550px;overflow-y:scroll;overflow-x:hidden;padding:10px;">
+            <div class="col-md-3" style="height:68vh;overflow-y:scroll;overflow-x:hidden;padding:10px;">
                 <!-- Tabs nav -->
                 <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                   <a class="nav-link mb-3 p-3 shadow text-center" id="plusButton"   href="#" >
+                   {{-- <a class="nav-link mb-3 p-3 shadow text-center" id="plusButton"   href="#" >
                        <span class="font-weight-bold big"><br/><i class="fa fa-plus-circle" style="font-size:40px;margin-bottom:5px;"></i><br/>
                        <h4> Add New Question </h4></span>
                        <h6 id="no_of_q">( {{$assessmentq->count()}} Question )</h6>
                        </br/>
-                    </a>
+                    </a> --}}
                     <?php $ind = 1; ?>
 
                     @if($assessmentq->count() > 0)
@@ -156,7 +154,7 @@
             </div>
 
 
-            <div class="col-md-9">
+            <div class="col-md-7">
                 <!-- Tabs content -->
                 <div class="tab-content" id="v-pills-tabContent">
                 <?php $inds = 1; ?>
@@ -164,9 +162,9 @@
                     @if($assessmentq->count() > 0)
                     @foreach($assessmentq as $aq)
                     @if($inds == 1)
-                    <div style="height:550px!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-5" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-3" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
                     @else
-                    <div style="height:550px!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show p-5" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show p-3" id="question{{$inds}}" role="tabpanel" aria-labelledby="question{{$inds}}-tab">
                     @endif
 
 
@@ -294,23 +292,27 @@
                             <div class="clearfix">
 
                             </div>
-
-                           <!-- <div class="col-md-12">
-                                <button type="button" id="plusButton" class="btn btn-sm btn-info" style="margin-bottom: 20px">
-                                    @lang('app.addMore') <i class="fa fa-plus"></i>
+                            
+                          
+                            </div>
+                            <div class="col-md-12">
+                                @if($loop->last)
+                                <button type="button" id="plusButton" class="btn btn-info" >
+                                    <i class="fa fa-plus"></i> @lang('app.addMore')
                                 </button>
-                            </div>-->
+                                @endif
+                            <button type="button" onclick="updateform({{$aq->id}},{{$inds}})" class="btn btn-success "><i class="fa fa-check"></i> Update</button>
+                            <a class="cancelButton btn btn-danger" href="{{ route('admin.assessments.index') }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a>
                             </div>
 
-
-                            <button type="button" onclick="updateform({{$aq->id}},{{$inds}})" class="btn btn-success "><i class="fa fa-check"></i> Update</button>
+                            
                             </form>
                         </p>
                     </div>
                     <?php $inds = $inds + 1; ?>
                     @endforeach
                     @else
-                    <div style="height:550px!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-5" id="question1" role="tabpanel" aria-labelledby="question1-tab">
+                    <div style="height:68vh!important;overflow-y:scroll;overflow-x:hidden;" class="tab-pane fade shadow rounded bg-white show active p-3" id="question1" role="tabpanel" aria-labelledby="question1-tab">
                         <h4 class="font-italic mb-4">Question 1</h4>
                         <p class="font-italic text-muted mb-2">
                         <form class="ajax-form" method="POST" id="createForm1">
@@ -433,7 +435,6 @@
 
     // Add More Inputs
     $('#plusButton').click(function(){
-
         $i = $i+1;
 
 
@@ -447,7 +448,7 @@
 
         '</a>'
 
-        var question_body = '<div class="tab-pane fade shadow rounded bg-white show p-5" '+
+        var question_body = '<div class="tab-pane fade shadow rounded bg-white show p-3" '+
                             'id="question'+indexs+'" role="tabpanel" aria-labelledby="question'+indexs+'-tab">'+
                             '<h4 class="font-italic mb-4">Question '+indexs+'</h4>'+
                         '<p class="font-italic text-muted mb-2">'+
@@ -516,11 +517,12 @@
             '</div>' +
             '</div>' +
             '</div>' +
-
-        '</div><button type="button" onclick="saveForm('+indexs+')" class="btn btn-success "><i class="fa fa-check"></i> @lang('app.save')</button></form>';
+            '</div>'+
+            '<div class="col-md-12"><button type="button" class="btn btn-info mr-2" disabled>Add More <i class="fa fa-plus"></i></button><button type="button" onclick="saveForm('+indexs+')" class="btn btn-success mr-2"><i class="fa fa-check"></i> @lang('app.save')</button><a class="btn btn-danger" href="{{ route("admin.assessments.index") }}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a></div></form>';
 
         $("#question"+indexs).append(question_content)
-
+        $("#plusButton").hide();
+        $(".cancelButton").hide();
         $('#question'+indexs+'-tab').trigger('click');
 
         window.location.hash = '#question'+indexs+'-tab';
@@ -537,6 +539,24 @@
         $("#question"+index+"-tab").remove();
         $("#no_of_q").html("( "+($i) + " Questions" + " )")
         $i = $i-1;
+
+        var backIndex = index-1;
+
+        //show previous add button
+        $("#plusButton").show();
+
+        //show previous cancel button
+        $(".cancelButton").show();
+
+
+        $('#question'+backIndex+'-tab').trigger('click');
+        window.location.hash = '#question'+backIndex+'-tab';
+        if (window.location.hash)
+            scroll(0,0);
+
+        
+        // takes care of some browsers issue
+        setTimeout(function(){scroll(0,0);},1);
     }
 
 

@@ -125,11 +125,12 @@ input:checked + .slider:before {
     <div class="row" id="statList">
         <div class="col-md-2 d-flex">
              <h3>Dashboard</h3>
-             @if($user->package!='free')
+             {{-- @if($user->package!='free')
              <span class="badge badge-info" style="align-self: end">{{ $subscription['plan']['name']}}</span>
              @else
-             <span class="badge badge-info" style="align-self: end">Free</span>
-             @endif
+             @endif --}}
+             <span class="badge badge-info" style="align-self: end">{{ ucfirst($user->package) }}</span>
+
              {{-- <a style="color: #f36421" href="#">Upgrade</a> --}}
         </div>
         <div class="col-md-10">
@@ -246,7 +247,7 @@ input:checked + .slider:before {
             @endforeach
         </div>
          <div class="col-md-4">
-             @if($user->package!='free')
+             {{-- @if($user->package!='free')
             <div class="card">
                 <div class="card-header d-flex p-0 ui-sortable-handle">
                     <h3 class="card-title p-3">
@@ -272,7 +273,7 @@ input:checked + .slider:before {
                     <h5>Current Plan: Free Plan</h5>
                 </div><!-- /.card-body -->
             </div>
-            @endif
+            @endif --}}
             <div class="card">
                 <div class="card-header d-flex p-0 ui-sortable-handle">
                     <h3 class="card-title p-3">
