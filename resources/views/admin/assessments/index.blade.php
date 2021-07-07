@@ -57,24 +57,25 @@
 
 
 @section('content')
-
+    @php $superAdmin =  Auth::user()->email == 'super@super.com'; @endphp
     <div class="row up_header">
-        <div class="col-md-12 mb-20 d-flex">
-            @if (Auth::user()->email == 'super@super.com')
-                <a href="{{ env('HIREWORK_ADMIN_URL') }}/admin" class="btn btn-primary mr-3"><i
-                        class="fa fa-arrow-left"></i> Back</a>
+        <div class="col-md-12 d-flex align-items-center">
+            @if ($superAdmin)
+                <a href="{{ env('HIREWORK_ADMIN_URL') }}/admin"> <i class="fa fa-arrow-left"></i></a>
             @endif
-            <h3>My Assessments</h3>
+            <h4 class="mb-0 @if($superAdmin) ml-2 @endif">My Assessments</h4>
         </div>
     </div>
+    <hr>
     <div class="ml-3 row">
             @permission('add_category')
             <a><button class="btn mr-2 btn-sm btn-primary pull-right" data-toggle="modal" data-target="#addAssessment" type="button">
                     <i class="fa fa-plus-circle"></i> Crete New Assessment
                 </button></a>
             @endpermission
+            @if(!$superAdmin)
             <a class="btn btn-sm btn-primary" href="/admin/library">Import from Library</a>
-
+            @endif
         </div>
         <hr />
         <div class="row assessment_lists">
