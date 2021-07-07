@@ -54,14 +54,17 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+@php
+$superAdmin = Auth::user()->email == 'super@super.com';
+@endphp
 
-<body onload="greet()" @if (Auth::user()->email!="super@super.com") class="menu-open" @endif>
+<body onload="greet()" @if (!$superAdmin) class="menu-open" @endif>
     <!-- header -->
 
     <div class="" id="header-container">
 
         <div class="menu-logo">
-            @if (Auth::user()->email!="super@super.com")
+            @if (!$superAdmin)
                 <a href="" id="menu-trigger">
                     <span></span>
                     <span></span>
@@ -86,7 +89,7 @@
                 <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
             </div> --}}
             <img src="/img/avatar.png" alt="avatar">
-            @if (Auth::user()->email!="super@super.com")
+            @if (!$superAdmin)
                 <a class="nav-link" style='color:white;' href="{{ route('logout') }}" title="Logout" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -98,98 +101,99 @@
     </div>
 
     <!-- side menu -->
+    @if(!$superAdmin)
     <div id="side-menu">
         <div class="side-menu-wrapper">
 
-            <ul class="menu-main">
-                <li class="{{ Request::segment(2) == 'dashboard' ? 'active-link' : '' }}">
-                    <a href="/admin/dashboard?first=true">
-                        <i class="fa fa-home fa-2x"></i>
-                        <p class="label_before">Home</p>
-                    </a>
-                </li>
-                <li class="{{ Request::segment(2) == 'assessments' ? 'active-link' : '' }}">
-                    <a href="/admin/assessments">
-                        <i class="fa fa-th fa-2x"></i>
-                        <p class="label_before">Assessments</p>
-                    </a>
-                </li>
-                <li class="{{ Request::segment(2) == 'jobs' ? 'active-link' : '' }}">
-                    <a href="/admin/jobs">
-                        <i class="fa fa-trophy fa-2x"></i>
-                        <p class="label_before">Jobs</p>
-                    </a>
-                </li>
-                <li
-                    class="{{ Request::segment(2) == 'job-applications' && Request::segment(3) == 'table-view' ? 'active-link' : '' }}">
-                    <a href="/admin/job-applications/table-view">
-                        <i class="fa fa-user fa-2x"></i>
-                        <p class="label_before">Candidates</p>
-                    </a>
-                </li>
-                <li class="{{ Request::segment(2) == 'interview-schedule' ? 'active-link' : '' }}">
-                    <a href="{{ route('admin.interview-schedule.index') }}">
-                        <i class="fa fa-calendar fa-2x"></i>
-                        <p class="label_before">Calendar</p>
-                    </a>
-                </li>
-                <li class="{{ Request::segment(2) == 'team' ? 'active-link' : '' }}">
-                    <a href="{{ route('admin.team.index') }}">
-                        <i class="fa fa-users fa-2x"></i>
-                        <p class="label_before">Teams</p>
-                    </a>
-                </li>
-                @permission('manage_settings')
-                    <li
-                        class="{{ Request::segment(2) == 'profile' || Request::segment('2') == 'settings' ? 'active-link' : '' }}">
-                        <a href="/admin/profile">
-                            <i class="fa fa-cog fa-2x"></i>
-                            <p class="label_before">Setting</p>
-                        </a>
-                    </li>
-                    @endpermission
-                    {{-- @permission('manage_settings')
-                <li x-data="{menuOpen: {{ Request::segment('2')=='settings' || Request::segment('2')=='profile'  ? 'true' : 'false'  }}}" :class="menuOpen==true ? 'open' : ''">
-                    <p  x-on:click="menuOpen = !menuOpen">Setting</p>
-                         <ul :class="menuOpen==true ? 'own__sub-active' : 'own__sub'">
-                            <li class="{{  Request::segment(2)=="profile" ? 'active-link' : '' }}">
-                                <a href="/admin/profile">
-                                    <i class="fa fa-user fa-2x"></i>
-                                    <p>My profile</p>
-                                </a>
-                            </li>
-                            <li class="{{  Request::segment(3)=="settings" ? 'active-link' : '' }}">
-                                <a href="{{ route('admin.settings.index') }}">
-                                    <i class="fa fa-cog fa-2x"></i>
-                                    <p>@lang('menu.businessSettings')</p>
-                                </a>
-                            </li>
-                            <li class="{{  Request::segment(3)=="role-permission" ? 'active-link' : '' }}">
-                                <a href="{{ route('admin.role-permission.index') }}">
-                                    <i class="fa fa-key fa-2x"></i>
-                                    <p>@lang('menu.rolesPermission')</p>
-                                </a>
-                            </li>
-                        </ul>
-                </li>
-
-                @endpermission --}}
-                    <hr>
-                    <li>
-                        <a target='_blank' href="/openings/{{ $global->id }}">
-                            <i class="fa fa-link fa-2x"></i>
-                            <p class="label_before">Openings</p>
-                        </a>
-                    </li>
-                    <br>
-                    <br>
-                    <br>
-
+                    <ul class="menu-main">
+                                <li class="{{ Request::segment(2) == 'dashboard' ? 'active-link' : '' }}">
+                                    <a href="/admin/dashboard?first=true">
+                                        <i class="fa fa-home fa-2x"></i>
+                                        <p class="label_before">Home</p>
+                                    </a>
+                                </li>
+                                <li class="{{ Request::segment(2) == 'assessments' ? 'active-link' : '' }}">
+                                    <a href="/admin/assessments">
+                                        <i class="fa fa-th fa-2x"></i>
+                                        <p class="label_before">Assessments</p>
+                                    </a>
+                                </li>
+                                <li class="{{ Request::segment(2) == 'jobs' ? 'active-link' : '' }}">
+                                    <a href="/admin/jobs">
+                                        <i class="fa fa-trophy fa-2x"></i>
+                                        <p class="label_before">Jobs</p>
+                                    </a>
+                                </li>
+                                <li
+                                    class="{{ Request::segment(2) == 'job-applications' && Request::segment(3) == 'table-view' ? 'active-link' : '' }}">
+                                    <a href="/admin/job-applications/table-view">
+                                        <i class="fa fa-user fa-2x"></i>
+                                        <p class="label_before">Candidates</p>
+                                    </a>
+                                </li>
+                                <li class="{{ Request::segment(2) == 'interview-schedule' ? 'active-link' : '' }}">
+                                    <a href="{{ route('admin.interview-schedule.index') }}">
+                                        <i class="fa fa-calendar fa-2x"></i>
+                                        <p class="label_before">Calendar</p>
+                                    </a>
+                                </li>
+                                <li class="{{ Request::segment(2) == 'team' ? 'active-link' : '' }}">
+                                    <a href="{{ route('admin.team.index') }}">
+                                        <i class="fa fa-users fa-2x"></i>
+                                        <p class="label_before">Teams</p>
+                                    </a>
+                                </li>
+                                    @permission('manage_settings')
+                                    <li
+                                        class="{{ Request::segment(2) == 'profile' || Request::segment('2') == 'settings' ? 'active-link' : '' }}">
+                                        <a href="/admin/profile">
+                                            <i class="fa fa-cog fa-2x"></i>
+                                            <p class="label_before">Setting</p>
+                                        </a>
+                                    </li>
+                                    @endpermission
+                                    {{-- @permission('manage_settings')
+                                        <li x-data="{menuOpen: {{ Request::segment('2')=='settings' || Request::segment('2')=='profile'  ? 'true' : 'false'  }}}" :class="menuOpen==true ? 'open' : ''">
+                                            <p  x-on:click="menuOpen = !menuOpen">Setting</p>
+                                                <ul :class="menuOpen==true ? 'own__sub-active' : 'own__sub'">
+                                                    <li class="{{  Request::segment(2)=="profile" ? 'active-link' : '' }}">
+                                                        <a href="/admin/profile">
+                                                            <i class="fa fa-user fa-2x"></i>
+                                                            <p>My profile</p>
+                                                        </a>
+                                                    </li>
+                                                    <li class="{{  Request::segment(3)=="settings" ? 'active-link' : '' }}">
+                                                        <a href="{{ route('admin.settings.index') }}">
+                                                            <i class="fa fa-cog fa-2x"></i>
+                                                            <p>@lang('menu.businessSettings')</p>
+                                                        </a>
+                                                    </li>
+                                                    <li class="{{  Request::segment(3)=="role-permission" ? 'active-link' : '' }}">
+                                                        <a href="{{ route('admin.role-permission.index') }}">
+                                                            <i class="fa fa-key fa-2x"></i>
+                                                            <p>@lang('menu.rolesPermission')</p>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                        </li>
+                                        @endpermission --}}
+                                    <hr>
+                                    <li>
+                                        <a target='_blank' href="/openings/{{ $global->id }}">
+                                            <i class="fa fa-link fa-2x"></i>
+                                            <p class="label_before">Openings</p>
+                                        </a>
+                                    </li>
+                                    <br>
+                                    <br>
+                                    <br>
 
 
-                </ul>
-            </div>
+
+                    </ul>
         </div>
+    </div>
+    @endif
         <div class="modal" id="upgradePlanFromFreeToOthers">
             <div class="modal-dialog">
                 <form class="ajax-form" action="/upgrade-from-free-to-others" method="GET"
@@ -222,29 +226,30 @@
                 </form>
             </div>
         </div>
+
         <!-- main container -->
-        <div id="main-container" style="margin-top:65px !important;">
-            @if($user->email!="super@super.com")
-            @php
-                function isFuture($date)
-                {
-                    if (strtotime(now()) <= strtotime($date)) {
-                        return 1;
+        <div id="main-container" style="margin-top:65px !important; {{ $superAdmin ? 'margin-left:0' : '' }}">
+            @if (!$superAdmin)
+                @php
+                    function isFuture($date)
+                    {
+                        if (strtotime(now()) <= strtotime($date)) {
+                            return 1;
+                        }
+                        return 0;
                     }
-                    return 0;
-                }
-                if ($user->trial_ends_at) {
-                    // if trial hasBeen Ended
-                    $trialHasEnded = isFuture($user->trial_ends_at);
-                    $remainingDays = now()->diffInDays($user->trial_ends_at, false);
-                }
-            @endphp
-            @if ($user->trial_ends_at)
-                <div class="alert alert-warning mb-0" role="alert">
-                    You have {{ now()->diffInDays($user->trial_ends_at, false)+1 }} days Free Trial left, Please <a data-toggle="modal"
-                        data-target="#upgradePlanFromFreeToOthers" href="#">upgrade</a> your plan.
-                </div>
-            @endif
+                    if ($user->trial_ends_at) {
+                        // if trial hasBeen Ended
+                        $trialHasEnded = isFuture($user->trial_ends_at);
+                        $remainingDays = now()->diffInDays($user->trial_ends_at, false);
+                    }
+                @endphp
+                @if ($user->trial_ends_at)
+                    <div class="alert alert-warning mb-0" role="alert">
+                        You have {{ now()->diffInDays($user->trial_ends_at, false) + 1 }} days Free Trial left, Please <a
+                            data-toggle="modal" data-target="#upgradePlanFromFreeToOthers" href="#">upgrade</a> your plan.
+                    </div>
+                @endif
             @endif
             <div class="greetings-box">
                 <div class="d-flex flex-column">
@@ -281,7 +286,6 @@
                 if (hrs >= 17)
                     document.getElementById("greeting").innerHTML = "Good Evening !"
             }
-
         </script>
 
         <!-- jQuery -->
@@ -349,7 +353,6 @@
                 });
 
             });
-
         </script>
 
         @stack('footer-script')

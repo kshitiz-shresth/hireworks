@@ -52,7 +52,7 @@
 
 
 @section('content')
-<div class="col-12">
+    <div class="col-12">
     <div class="card">
         <div class="card-header d-flex align-items-center">
             <a   href="/admin/assessments"> <i class="fa fa-arrow-left"></i></a>
@@ -61,20 +61,63 @@
             <div style="display: flex; flex-direction: column;">
                 @foreach (\App\Assessment::where('company_id',0)->get() as $item)
                 <div class="library-box">
-                    <span><a href="/admin/assessments/show?id={{ $item->id }}">{{ $item->name }}</a></span>
+                    <span><a onclick="showAssessment({{$item->id}})" href="#">{{ $item->name }}</a></span>
                     <form action="/import-assessments" method="post">
                         @csrf
                         <input type="hidden" name="company_id" value="{{ Auth::user()->company_id }}">
                         <input type="hidden" name="assessment_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-success"><i class="fa fa-caret-square-o-left"></i> Import</button>
                     </form>
-                    
                 </div>
                 @endforeach
             </div>
         </div>
     </div>
 </div>
+
+    @foreach (\App\Assessment::where('company_id',0)->get() as $item)
+    <div class="modal" id="showAssessment{{$item->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Assessment</h4>
+                    <button type="button"  class="close"
+                            data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    @foreach($item->questions as $question)
+                        <div class="library-question">
+                            <strong>Q{{ $loop->iteration.'. '.$question->question}}</strong>
+                            <div class="d-flex flex-column pl-4 text-primary">
+                                <small><span class="text-secondary">Question Type:</span> <i>{{$question->question_type}}</i></small>
+                                @if($question->question_type=='Multiple')
+                                    <small><span class="text-secondary">Options:</span>
+                                    @foreach($question->multiple_choices as $multiple_choice)
+                                        <i>{{$multiple_choice->answer}}</i> @if(!$loop->last),@endif
+                                    @endforeach</small>
+                                @endif
+                            </div>
+                        </div>
+                        @if(!$loop->last)
+                        <hr>
+                        @endif
+                    @endforeach
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger"
+                            data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection
 
 @push('footer-script')
@@ -83,6 +126,10 @@
     <script src="//cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 
     <script>
+        function showAssessment(id){
+            $(`#showAssessment${id}`).modal('show');
+        }
+
         function deleteAssessment(event,id){
             event.preventDefault()
 

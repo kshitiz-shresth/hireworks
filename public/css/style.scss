@@ -260,48 +260,48 @@ ul {
 
 // when menu is open
 body {
-    // &.menu-open {
-    //     #header-container {
-    //         #menu-trigger {
-    //             span {
-    //                 &:nth-child(1) {
-    //                     top: 0px;
-    //                     opacity: 0;
-    //                 }
+    &.menu-open {
+        #header-container {
+            #menu-trigger {
+                span {
+                    &:nth-child(1) {
+                        top: 0px;
+                        opacity: 0;
+                    }
 
-    //                 &:nth-child(2) {
-    //                     top: 8px;
-    //                     transform: rotate(135deg);
-    //                     transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    //                 }
+                    &:nth-child(2) {
+                        top: 8px;
+                        transform: rotate(135deg);
+                        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+                    }
 
-    //                 &:nth-child(3) {
-    //                     top: 8px;
-    //                     transform: rotate(45deg);
-    //                     transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
-    //                 }
+                    &:nth-child(3) {
+                        top: 8px;
+                        transform: rotate(45deg);
+                        transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+                    }
 
-    //                 &:nth-child(4) {
-    //                     top: 16px;
-    //                     opacity: 0;
-    //                 }
-    //             }
-    //         }
-    //     }
+                    &:nth-child(4) {
+                        top: 16px;
+                        opacity: 0;
+                    }
+                }
+            }
+        }
 
-    #side-menu {
-        .side-menu-wrapper {
-            transform: translate3d(101px, 0, 0);
-            transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+        #side-menu {
+            .side-menu-wrapper {
+                transform: translate3d(101px, 0, 0);
+                transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+            }
+        }
+
+        #main-container {
+            // transform: translateX(101px);
+            margin-left: 101px;
+            transition: margin-left .45s cubic-bezier(0.77, 0, 0.175, 1);
         }
     }
-
-    #main-container {
-        // transform: translateX(101px);
-        margin-left: 101px;
-        transition: margin-left .45s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-}
 
 
 // dashboard jobs sidemenu (inner)
