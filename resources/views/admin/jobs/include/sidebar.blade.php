@@ -21,8 +21,12 @@
                             <p class="main_text">Hiring Team</p></a>
                         </button>
                         <button class="buttons {{ request('page') == 4 ? 'active' : '' }}" disabled="">
-                            <a href="/admin/jobs/show?id={{ request('id') }}&page=4"><i class="fa fa-key fa-lg main-icon-1"></i>
+                            <a href="/admin/jobs/show?id={{ request('id') }}&page=4"><i class="fa fa-book fa-lg main-icon-1"></i>
                             <p class="main_text">Assessment</p></a>
+                        </button>
+                        <button class="buttons {{ request('page') == 5 ? 'active' : '' }}" disabled="">
+                            <a href="/admin/jobs/show?id={{ request('id') }}&page=5"><i class="fa fa-bullhorn fa-lg main-icon-1"></i>
+                            <p class="main_text">Advertise</p></a>
                         </button>
                     </div>
                 </div>

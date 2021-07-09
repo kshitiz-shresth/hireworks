@@ -170,7 +170,7 @@ class AdminJobsController extends AdminBaseController
 
         $job = Job::find($id);
 
-        if($pageNumber>4){ abort(404); }
+        if($pageNumber>5){ abort(404); }
         $this->job = $job;
         $this->categories = JobCategory::all();
         $this->countries = Country::all();
@@ -184,6 +184,7 @@ class AdminJobsController extends AdminBaseController
         $page[2] = 'description';
         $page[3] = 'hiring-team';
         $page[4] = 'assesment';
+        $page[5] = 'advertise';
 
         return view('admin.jobs.'.$page[$pageNumber], $this->data);
     }
@@ -271,9 +272,8 @@ class AdminJobsController extends AdminBaseController
         $job->skills = $request->job_skills;
 
         $job->location_id = 5;
-        $job->advertise = $request->advertise;
+        $job->advertise = json_encode($request->advertise);
         $job->status = $request->status;
-
         $job->save();
 
         JobTeamMember::where('job_id', $job->id)->delete();
