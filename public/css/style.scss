@@ -302,158 +302,216 @@ body {
             transition: margin-left .45s cubic-bezier(0.77, 0, 0.175, 1);
         }
     }
+    // dashboard jobs sidemenu (inner)
 
-
-// dashboard jobs sidemenu (inner)
-
-#jobs-sidemenu {
-    display: flex;
-    flex-direction: column;
-
-    .buttons {
+    #jobs-sidemenu {
         display: flex;
-        padding: 5px 7px;
-        background: #fff;
-        border: #dddddd 1px solid;
-        margin-bottom: 8px;
+        flex-direction: column;
 
-        a {
+        .buttons {
             display: flex;
-            align-items: center;
-            font-size: 13px;
-            color: #222222;
-            width: 100%;
-
-            p {
-                margin: 0;
-                padding-left: 6px;
-                text-align: left;
-            }
-        }
-
-        &.active {
-            border: #303150 2px solid;
-            background: #303150;
+            padding: 5px 7px;
+            background: #fff;
+            border: #dddddd 1px solid;
+            margin-bottom: 8px;
 
             a {
-                color: #f8f8f8;
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                color: #222222;
+                width: 100%;
+
+                p {
+                    margin: 0;
+                    padding-left: 6px;
+                    text-align: left;
+                }
             }
 
-            &:hover {
+            &.active {
                 border: #303150 2px solid;
                 background: #303150;
 
                 a {
                     color: #f8f8f8;
                 }
-            }
-        }
 
-        &:hover {
-            border: #303150 0.5px solid;
+                &:hover {
+                    border: #303150 2px solid;
+                    background: #303150;
 
-            a {
-                color: #303150;
-            }
-        }
-    }
-}
-
-// job create sidemenu
-#create-new-button {
-    display: flex;
-    margin-bottom: 20px;
-
-    button {
-        background: #ffff;
-        border: 0;
-        color: #474747;
-        padding: 22px 18px;
-        border-radius: 40px;
-        box-shadow: 0px 5px 15px #00000029;
-
-        img {
-            width: 30px;
-            padding-right: 10px;
-        }
-    }
-}
-
-
-.comment-sections {
-    padding: 10px 16px;
-    #user-comments{
-        .comment-box {
-            background: #f4f4f4;
-            padding: 8px;
-            margin-bottom: 5px;
-    
-            .user-box {
-                display: flex;
-                align-items: center;
-    
-                .user-img {
-                    margin-right: 6px;
-    
-                    img {
-                        width: 2.3rem;
+                    a {
+                        color: #f8f8f8;
                     }
                 }
-    
-                .user-section {
-                    display: flex;
-                    flex-direction: column;
-    
-                    .user-name {
-                        font-size: 13px;
-                        font-weight: 600;
-                        color: #333333;
-                    }
-    
-                    .time {
-                        font-size: 11px;
-                    }
-                }
-    
-            }
-    
-            .comment {
-                padding: 7px 1px 0px 1px;
-    
-                p {
-                    margin-bottom: 0;
-                }
-            }
-        }
-    }
-
-    .post-comment {
-        display: flex;
-        align-items: baseline;
-
-        button {
-            margin-left: 4px;
-            border: 0.1px solid;
-            border-radius: 5px;
-            padding: 6px 10px;
-            right: 16px;
-            color: #007bff;
-
-            &:focus {
-                outline: none;
-            }
-
-            &:visited {
-                outline: none;
-                background: #303150;
-                color: #fff;
             }
 
             &:hover {
-                background: #35508e;
-                color: #fff;
-                cursor: pointer;
+                border: #303150 0.5px solid;
+
+                a {
+                    color: #303150;
+                }
             }
         }
+    }
+
+    // job create sidemenu
+    #create-new-button {
+        display: flex;
+        margin-bottom: 20px;
+
+        button {
+            background: #ffff;
+            border: 0;
+            color: #474747;
+            padding: 22px 18px;
+            border-radius: 40px;
+            box-shadow: 0px 5px 15px #00000029;
+
+            img {
+                width: 30px;
+                padding-right: 10px;
+            }
+        }
+    }
+
+
+    .comment-sections {
+        padding: 10px 16px;
+        #user-comments{
+            .comment-box {
+                background: #f4f4f4;
+                padding: 8px;
+                margin-bottom: 5px;
+        
+                .user-box {
+                    display: flex;
+                    align-items: center;
+        
+                    .user-img {
+                        margin-right: 6px;
+        
+                        img {
+                            width: 2.3rem;
+                        }
+                    }
+        
+                    .user-section {
+                        display: flex;
+                        flex-direction: column;
+        
+                        .user-name {
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: #333333;
+                        }
+        
+                        .time {
+                            font-size: 11px;
+                        }
+                    }
+        
+                }
+        
+                .comment {
+                    padding: 7px 1px 0px 1px;
+        
+                    p {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .post-comment {
+            display: flex;
+            align-items: baseline;
+
+            button {
+                margin-left: 4px;
+                border: 0.1px solid;
+                border-radius: 5px;
+                padding: 6px 10px;
+                right: 16px;
+                color: #007bff;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:visited {
+                    outline: none;
+                    background: #303150;
+                    color: #fff;
+                }
+
+                &:hover {
+                    background: #35508e;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    ul.advertise {
+        list-style-type: none;
+        li{
+            display: inline-block;
+        }
+        input[type="checkbox"]{
+            display: none;
+        }
+
+        label {
+            border: 1px solid #fff;
+            padding: 10px;
+            display: block;
+            position: relative;
+            margin: 10px;
+            cursor: pointer;
+        }
+        
+            label:before {
+                background-color: white;
+                color: white;
+                content: " ";
+                display: block;
+                border-radius: 50%;
+                border: 1px solid grey;
+                position: absolute;
+                top: -5px;
+                left: -5px;
+                width: 25px;
+                height: 25px;
+                text-align: center;
+                line-height: 28px;
+                transition-duration: 0.4s;
+                transform: scale(0);
+            }
+            
+            label img {
+                width: 100px;
+                transition-duration: 0.2s;
+                transform-origin: 50% 50%;
+            }
+            
+            :checked + label {
+                border-color: #ddd;
+            }
+            
+            :checked + label:before {
+                content: "✓";
+                background-color: grey;
+                transform: scale(1);
+            }
+            
+            :checked + label img {
+                transform: scale(0.9);
+                /* box-shadow: 0 0 5px #333; */
+                z-index: -1;
+            }
     }
 }

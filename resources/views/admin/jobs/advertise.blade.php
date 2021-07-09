@@ -419,82 +419,29 @@ input:checked + .slider:before {
                             {{-- end main --}}
 
                             <hr>
-
-                            <div class="col-md-12">
-                            <label for="address">Assessments</label>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                    <a class="nav-link mb-3 p-3 shadow text-center" id="plusButton" >
-                                            <span class="font-weight-bold big"><br/>
-                                            <i class="fa fa-plus-circle fa-lg"> </i>
-                                            <h4>Add from My Assessments</h4>
-                                            <br/>
-                                         </a>
-
-                                    </div>
-                                    <div class="col-md-4">
-
-                                    <a class="nav-link mb-3 p-3 shadow text-center" id="plusCButton" data-toggle="modal" data-target="#myModalX">
-                                            <span class="font-weight-bold big"><br/>
-                                            <i class="fa fa-plus-circle fa-lg"> </i>
-                                            <h4>Add Custom Question</h4>
-                                            <br/>
-                                         </a>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
-
-
-
-                            @if($questions->count() > 0)
-                                <div class="col-md-12 questionDiv" style="display:block">
-                            @else
-                                <div class="col-md-12 questionDiv" style="display:none">
-                            @endif
-
-                                <table class="table table-bordered qtbl">
-                                    <thead>
-                                        <th class='text-center'>S.N</th>
-                                        <th class='text-center'>Question</th>
-                                        <th class='text-center'>Answer Type</th>
-                                        <th class='text-center'>Action</th>
-                                    </thead>
-
-                                    <tbody class='qtblBody'>
-                                        <?php $ind = 1; ?>
-                                        @if($questions->count() > 0)
-                                        @foreach($questions as $qs)
-
-                                        <tr id="{{$qs->id}}">
-                                            <td  class="text-center"><i class="pull-left fa fa-sort fa-lg" aria-hidden="true"></i>
-                                            {{$ind}}
-                                            </td>
-                                            <td>{{$qs->question}}</td>
-                                            <td class="text-center">{{$qs->question_type}}</td>
-                                            <td class="text-center">
-                                            <i onclick="editQuestion({{$qs->id}})" class="fa fa-pencil fa-lg"></i> | <i
-                                            onclick="deleteQuestion({{$qs->id}})" class="fa fa-trash fa-lg"></i>
-                                            </td>
-                                        </tr>
-                                        <?php $ind = $ind + 1; ?>
-                                        @endforeach
-                                        @endif
-                                    </tbody>
-                                </table>
-                                <p>**Drag Rows to change question order</p>
-                            </div>
+                            @php  $advertiseArray = isset($job->advertise ) ? json_decode($job->advertise) : '' ; @endphp
+                            <ul class="advertise">
+                                <li>
+                                  <input type="checkbox" id="myCheckbox1" value="1" name="advertise[]" @if($advertiseArray) {{ in_array(1,$advertiseArray) ?  'checked' : '' }}   @endif/>
+                                  <label for="myCheckbox1"><img src="/img/glass-door.png" /></label>
+                                </li>
+                                <li>
+                              
+                                  <input type="checkbox" id="myCheckbox2" value="2"  name="advertise[]"  @if($advertiseArray) {{ in_array(2,$advertiseArray) ?  'checked' : '' }}   @endif/>
+                                  <label for="myCheckbox2"><img src="/img/zip-recruiter.png" /></label>
+                                </li>
+                                <li>
+                              
+                                  <input type="checkbox" id="myCheckbox3" value="3"  name="advertise[]"  @if($advertiseArray) {{ in_array(3,$advertiseArray) ?  'checked' : '' }}   @endif/>
+                                  <label for="myCheckbox3"><img src="/img/indeed.png" /></label>
+                                </li>
+                            </ul>
                         </div>
                         <br />
                         <input type="hidden" name="page" value="{{ request('page') }}">
 
-                        <button type="button" id="save-next-form" class="btn btn-primary ml-2"><i
-                                        class="fa fa-arrow-right"></i> Next</button>
-                        {{-- <button type="button" id="back-to-job" class="btn btn-success"><i
-                                    class="fa fa-trophy"></i>&nbsp;Save</button> --}}
+                        <button type="button" id="save-form" class="btn btn-success"><i
+                                    class="fa fa-check"></i> @lang('app.save')</button>
 
                     </form>
                 </div>
@@ -503,117 +450,7 @@ input:checked + .slider:before {
     </div>
 
 
-    <!-- The Modal -->
-<div class="modal" id="myModal" style="z-index:999999;">
-  <div class="modal-dialog assessmentsGroupBox">
-    <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Select Assessments</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-      <div class="row modalbody">
-
-           </div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<div class="modal" id="myModalX">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-    <form class="ajax-form" method="POST" id="customQuestion">
-    @csrf
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Question</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="address">Write your question here</label>
-                    <input value="{{$job->id}}" type="hidden" name="job_id" />
-                    <input name="question" id="question" class="form-control" placeholder="Write your question here"></textarea>
-
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="address">Answer Type</label>
-                    <select  id="question_type"onchange="changeddl.call(this)" name="question_type" class="form-control question-type-ddl">
-                        <option value="Text">Text</option>
-                        <option value="Multiple">Multiple Choice</option>
-                        <option value="Video">Video</option>
-                        <option value="Audio">Audio</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-12" >
-                <div class="form-group multiple-choice-div" style="display:none">
-                    <div class="answerParentDiv">
-                        <div class="row answerDiv">
-                            <div class="col-md-6">
-                                <input class="form-control Multiple" name="multiple[]" type="text" placeholder="Enter answer" /><br />
-                            </div>
-                            <div class="col-md-1 removeDivInter">
-
-                            </div>
-                        </div>
-                    </div>
-                    <a style="cursor:pointer;color:#0151ce" onclick="addAnswer.call(this)" class="addAnswer"><span class="fa fa-plus"></span> <b>Add Answer</b></a>
-                </div>
-
-            </div>
-
-            <div class="col-md-9">
-                <div class="form-group time_limit" style="display:none">
-                    <label for="address">Max Recording time limit (in minutes)</label>
-                    <input type="number" name="time_limit"  class="form-control time_input" placeholder="e.g. 5"></input>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="address">@lang('app.required')</label>
-                    <select name="required" class="form-control">
-                        <option value="yes">@lang('app.yes')</option>
-                        <option value="no">@lang('app.no')</option>
-                    </select>
-                </div>
-            </div>
-      </div
-
-
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-      <button type="button" class="btn btn-success" id="mSave">Add</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
 
 
 
@@ -756,19 +593,9 @@ input:checked + .slider:before {
                 container: '#createForm',
                 type: "POST",
                 redirect: true,
-                data: $('#createForm').serialize()
-            })
-        });
-
-        $('#save-next-form').click(function () {
-            $.easyAjax({
-                url: '{{route('admin.jobs.update',$job->id)}}',
-                container: '#createForm',
-                type: "POST",
-                redirect: true,
                 data: $('#createForm').serialize(),
                 success:function(data){
-                    var url = "/admin/jobs/show?id={{ $job->id }}&page=5";
+                    var url = "/admin/jobs";
                         window.location.href = url;
                 }
             })
