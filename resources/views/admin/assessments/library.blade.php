@@ -110,6 +110,12 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
+                    <form action="/import-assessments" method="post">
+                        @csrf
+                        <input type="hidden" name="company_id" value="{{ Auth::user()->company_id }}">
+                        <input type="hidden" name="assessment_id" value="{{ $item->id }}">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-caret-square-o-left"></i> Import</button>
+                    </form>
                     <button type="button" class="btn btn-danger"
                             data-dismiss="modal">Cancel</button>
                 </div>
