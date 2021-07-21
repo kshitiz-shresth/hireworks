@@ -262,6 +262,8 @@
              This browser does not support PDFs. Please download the PDF to view it: Download PDF
         </iframe>
 
+    @elseif(in_array(strtolower($ext), ['gif','jpg','jpeg','png']))
+        <img class="img-fluid" src="{{asset('user-uploads/resumes/'.$application->resume)}}" alt="">
     @else
     <iframe style="height:500px !important;width:100% !important" src="https://view.officeapps.live.com/op/view.aspx?src={{asset('user-uploads/resumes/'.$application->resume)}}">
 

@@ -276,7 +276,8 @@
                         src="{{asset('user-uploads/resumes/'.$application->resume)}}">
                     This browser does not support PDFs. Please download the PDF to view it: Download PDF
                 </iframe>
-
+            @elseif(in_array(strtolower($ext), ['gif','jpg','jpeg','png']))
+                    <img class="img-fluid" src="{{asset('user-uploads/resumes/'.$application->resume)}}" alt="">
             @else
                 <iframe style="height:500px !important;width:100% !important"
                         src="https://view.officeapps.live.com/op/view.aspx?src={{asset('user-uploads/resumes/'.$application->resume)}}">
@@ -367,7 +368,7 @@
                         <div class="user">
                             <p class="myStrong">Attachments By User</p>
                         @if($application->resume)
-                            <p>CV/Resume: <a href="/user-uploads/cover-letters/{{ $application->resume }}"
+                            <p>CV/Resume: <a href="/user-uploads/resumes/{{ $application->resume }}"
                                                 target="_blank" style="color:#1b5dd0;text-decoration:underline !important;">Download</a>
                             </p>
                         @endif
