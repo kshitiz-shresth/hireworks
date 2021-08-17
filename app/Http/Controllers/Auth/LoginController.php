@@ -23,6 +23,33 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public function login(Request $request)
+    {
+        if($request->postType=='rolespermissions'){
+          $this->redirectTo = route('admin.role-permission.index');
+        }
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
     /**
      * Where to redirect users after login.
      *
@@ -35,10 +62,12 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         parent::__construct();
-        $this->middleware('guest')->except('logout');
+        if($request->postType!='rolespermissions'){
+          $this->middleware('guest')->except('logout');
+        }
     }
 
     public function showLoginForm()
@@ -51,7 +80,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
 //        $user = auth()->user();
-        return 'admin/dashboard';
+        return $this->redirectTo;
     }
 
     public function logout(Request $request)

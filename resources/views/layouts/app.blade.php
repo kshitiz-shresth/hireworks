@@ -118,12 +118,15 @@ $superAdmin = Auth::user()->email == 'super@super.com';
                                         <p class="label_before">Assessments</p>
                                     </a>
                                 </li>
+                                @permission('view_jobs')
                                 <li class="{{ Request::segment(2) == 'jobs' ? 'active-link' : '' }}">
                                     <a href="/admin/jobs">
                                         <i class="fa fa-trophy fa-2x"></i>
                                         <p class="label_before">Jobs</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('view_job_applications')
                                 <li
                                     class="{{ Request::segment(2) == 'job-applications' && Request::segment(3) == 'table-view' ? 'active-link' : '' }}">
                                     <a href="/admin/job-applications/table-view">
@@ -131,18 +134,23 @@ $superAdmin = Auth::user()->email == 'super@super.com';
                                         <p class="label_before">Candidates</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('view_schedule')
                                 <li class="{{ Request::segment(2) == 'interview-schedule' ? 'active-link' : '' }}">
                                     <a href="{{ route('admin.interview-schedule.index') }}">
                                         <i class="fa fa-calendar fa-2x"></i>
                                         <p class="label_before">Calendar</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('view_team')
                                 <li class="{{ Request::segment(2) == 'team' ? 'active-link' : '' }}">
                                     <a href="{{ route('admin.team.index') }}">
                                         <i class="fa fa-users fa-2x"></i>
                                         <p class="label_before">Teams</p>
                                     </a>
                                 </li>
+                                @endpermission
                                     @permission('manage_settings')
                                     <li
                                         class="{{ Request::segment(2) == 'profile' || Request::segment('2') == 'settings' ? 'active-link' : '' }}">

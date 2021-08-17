@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="{{ asset('assets/node_modules/bootstrap-select/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/node_modules/multiselect/css/multi-select.css') }}">
 @endpush
-
+@php
+$superAdmin = Auth::user()->email == 'super@super.com';
+@endphp
 @section('content')
     <div class="row">
+        @if(!$superAdmin)
         <div class="col-2">
             <div class="card">
                 <div class="card-body">
@@ -17,49 +20,52 @@
                         <button class="buttons {{ Request::segment(2)=='profile' ? 'active' : '' }}" >
                             <a href="/admin/profile">
                                 <i class="fa fa-suitcase fa-lg main-icon-1"></i>
-                                <p class="main_text">My Profile</p> 
+                                <p class="main_text">My Profile</p>
                             </a>
                         </button>
                         <button class="buttons {{ Request::segment(3)=='settings' ? 'active' : '' }}" >
                             <a href="{{ route('admin.settings.index') }}">
                                 <i class="fa fa-cog fa-lg main-icon-1"></i>
-                                <p class="main_text">@lang('menu.businessSettings')</p> 
+                                <p class="main_text">@lang('menu.businessSettings')</p>
                             </a>
                         </button>
                         <hr>
+                        @if(0)
                         <button class="buttons {{ Request::segment(3)=='role-permission' ? 'active' : '' }}" >
                             <a href="{{ route('admin.role-permission.index') }}">
                                 <i class="fa fa-key fa-lg main-icon-1"></i>
-                                <p class="main_text">@lang('menu.rolesPermission')</p> 
+                                <p class="main_text">@lang('menu.rolesPermission')</p>
                             </a>
                         </button>
+                        @endif
                         <button class="buttons {{ Request::segment(3)=='payment-settings' ? 'active' : '' }}" >
                             <a href="{{ route('admin.payment-setting.index') }}">
                                 <i class="fa fa-dollar fa-lg main-icon-1"></i>
-                                <p class="main_text">Payment & Methods</p> 
+                                <p class="main_text">Payment & Methods</p>
                             </a>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-10">
+        @endif
+        <div class="col-{{$superAdmin? 12 : 10}}">
             <div class="card">
                 <div class="card-body">
                     <div class="col-sm-12">
-                        <a href="javascript:;" id="addRole" class="btn btn-success btn-sm btn-outline  waves-effect waves-light "><i class="fa fa-gear"></i> @lang("modules.roles.addRole")</a>
+                        <a href="javascript:;" id="addRole" class="btn btn-success btn-sm btn-outline waves-effect waves-light "><i class="fa fa-gear"></i> @lang("modules.roles.addRole")</a>
                     </div>
 
                     @foreach($roles as $role)
-                        <div class="col-md-12 b-all mt-2">
+                        <div class="mt-2 col-md-12 b-all">
                             <div class="row">
-                                <div class="col-md-4 text-center p-2 bg-dark ">
-                                    <h5 class="text-white mt-2 mb-2"><strong>{{ ucwords($role->display_name) }}</strong></h5>
+                                <div class="p-2 text-center col-md-4 bg-dark ">
+                                    <h5 class="mt-2 mb-2 text-white"><strong>{{ ucwords($role->display_name) }}</strong></h5>
                                 </div>
-                                <div class="col-md-4 text-center bg-dark role-members">
+                                <div class="text-center col-md-4 bg-dark role-members">
                                     {{--<button class="btn btn-xs btn-danger btn-rounded show-members" data-role-id="{{ $role->id }}"><i class="fa fa-users"></i> {{ count($role->roleuser)  }} Member(s)</button>--}}
                                 </div>
-                                <div class="col-md-4 p-2 bg-dark" style="padding-bottom: 11px !important;">
+                                <div class="p-2 col-md-4 bg-dark" style="padding-bottom: 11px !important;">
                                     <button class="btn btn-default btn-sm btn-rounded pull-right toggle-permission" data-role-id="{{ $role->id }}"><i class="fa fa-key"></i> Permissions</button>
                                 </div>
 
@@ -129,7 +135,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <span class="caption-subject font-red-sunglo bold uppercase" id="modelHeading"></span>
+                    <span class="uppercase caption-subject font-red-sunglo bold" id="modelHeading"></span>
                 </div>
                 <div class="modal-body">
                     Loading...

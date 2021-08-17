@@ -40,26 +40,28 @@
                         <button class="buttons {{ Request::segment(2)=='profile' ? 'active' : '' }}" >
                             <a href="/admin/profile">
                                 <i class="fa fa-suitcase fa-lg main-icon-1"></i>
-                                <p class="main_text">My Profile</p> 
+                                <p class="main_text">My Profile</p>
                             </a>
                         </button>
                         <button class="buttons {{ Request::segment(3)=='settings' ? 'active' : '' }}" >
                             <a href="{{ route('admin.settings.index') }}">
                                 <i class="fa fa-cog fa-lg main-icon-1"></i>
-                                <p class="main_text">@lang('menu.businessSettings')</p> 
+                                <p class="main_text">@lang('menu.businessSettings')</p>
                             </a>
                         </button>
                         <hr>
+                        @if(0)
                         <button class="buttons {{ Request::segment(3)=='role-permission' ? 'active' : '' }}" >
                             <a href="{{ route('admin.role-permission.index') }}">
                                 <i class="fa fa-key fa-lg main-icon-1"></i>
-                                <p class="main_text">@lang('menu.rolesPermission')</p> 
+                                <p class="main_text">@lang('menu.rolesPermission')</p>
                             </a>
                         </button>
+                        @endif
                         <button class="buttons {{ Request::segment(3)=='role-permission' ? 'active' : '' }}" >
                             <a href="{{ route('admin.payment-setting.index') }}">
                                 <i class="fa fa-dollar fa-lg main-icon-1"></i>
-                                <p class="main_text">Payment & Methods</p> 
+                                <p class="main_text">Payment & Methods</p>
                             </a>
                         </button>
                     </div>
